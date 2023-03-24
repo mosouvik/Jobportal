@@ -1,0 +1,121 @@
+<%-include('common/head')%>
+
+<body class="background-color-white">
+
+    
+    <%-include('common/nav')%>
+
+
+    <section id="post_job">
+        <div class="vertical-space-100"></div>
+        <div class="vertical-space-101"></div>
+        <div class="container">
+            <h2>Registration</h2>
+           
+            <br>
+            <br>
+            <div class="container">
+                Already have an account ? <a href="/login"
+                    class="font-color-orange margin-left">Signin</a>
+            </div>
+            
+            <div class="vertical-space-60"></div>
+            <div class="job-post-box">
+                <form action="/registercreate" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="exampleInputJobtitle">Name</label>
+                        <input type="text" class="form-control" name="name"
+                            placeholder="Enter your name" required />
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputCompany">Email</label>
+                                <input type="email" class="form-control" name="email"
+                                    placeholder="Enter your email" required />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputLoction">Contact.No</label>
+                                <input type="number" class="form-control" name="contact"
+                                    placeholder="Enter your contact number" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputLoction">Address</label>
+                                <input type="text" class="form-control" name="address"
+                                    placeholder="Enter your address" required />
+                            </div>
+                        </div>
+                        
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputLoction">Profile Picture</label>
+                                    <input type="file" class="form-control" name="image"
+                                        placeholder="Enter your profile-picture" required />
+                                </div>
+                            </div>
+             <style>
+                #u{margin-left: 19px;}
+                #s{margin-left: 20px;margin-bottom: 30px;}
+             </style>              
+                             
+                                <label for="exampleInputLoction" id="u">User Type</label>
+                            <select class="custom-select" id="s" name="isEmployer">
+                                <option selected>Select User type</option>
+                                <option value="jobseeker">Job Seeker</option>
+                                <option value="employer">Employer</option>
+                                
+                              </select>
+                           <br><br><br><br><br><br>
+                            
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputCompany">Password</label>
+                                    <input type="password" class="form-control" name="password"
+                                        placeholder="Enter your password" required />
+                                </div>
+                            </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputCompany">Confirm Password</label>
+                                        <input type="password" class="form-control" name="cpassword"
+                                            placeholder="Enter your password" required />
+                                    </div>
+                                
+                    </div>
+                    
+                    
+                    
+                   
+                    
+                    <button type="submit" class="btn Post-Job-Offer">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <%-include('common/footer')%>
+
+
+    <script data-cfasync="false" src="js/email-decode.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="owlcarousel/owl.carousel.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+
+    <script src="js/custom.js"></script>
+    <script>
+        (function (e, t, n) {
+            var r = e.querySelectorAll("html")[0];
+            r.className = r.className.replace(/(^|\s)no-js(\s|$)/, "$1js$2");
+        })(document, window, 0);
+    </script>
+</body>
+
+</html>

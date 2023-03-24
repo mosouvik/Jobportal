@@ -1,0 +1,71 @@
+<%-include('common/head')%>
+
+<body class="background-color-white">
+
+    
+    <%-include('common/nav')%>
+
+
+    <section id="post_job">
+        <div class="vertical-space-100"></div>
+        <div class="vertical-space-101"></div>
+        <div class="container">
+            <h2>Login</h2>
+           
+            <br>
+            <br>
+            <div class="container">
+                Don't have an account yet?<a href="/register"
+                    class="font-color-orange margin-left">Signup</a>
+            </div>
+            
+            <div class="vertical-space-60"></div>
+            <div class="job-post-box">
+                <form action="/registercreate" method="post" enctype="multipart/form-data">                 
+                       <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputCompany">Email</label>
+                                <input type="email" class="form-control" name="email"
+                                    placeholder="Enter your email" required />
+                            </div>                    
+                    </div>
+                                
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputCompany">Password</label>
+                                    <input type="password" class="form-control" name="password"
+                                        placeholder="Enter your password" required />
+                                </div>
+                         
+                                
+                    
+                    
+                    
+                   
+                    
+                    <button type="submit" class="btn Post-Job-Offer">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <%-include('common/footer')%>
+
+
+    <script data-cfasync="false" src="js/email-decode.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="owlcarousel/owl.carousel.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+
+    <script src="js/custom.js"></script>
+    <script>
+        (function (e, t, n) {
+            var r = e.querySelectorAll("html")[0];
+            r.className = r.className.replace(/(^|\s)no-js(\s|$)/, "$1js$2");
+        })(document, window, 0);
+    </script>
+</body>
+
+</html>
