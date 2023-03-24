@@ -2,7 +2,8 @@
 
 <body>
 
-    <%-include('common/nav')%>
+<%-include('common/nav')%>
+    
 
 
     <section id="intro">
@@ -28,10 +29,61 @@
     <section id="resent-job-post" class="background-color-white-drak">
         <div class="vertical-space-85"></div>
         <div class="container text-center">
-            
+            <h4 class="text-left">Filter Jobs Result</h4>
             <div class="vertical-space-30"></div>
             <div class="row">
-                
+                <div class="col-lg-4 col-md-12">
+                    <div class="Job-Category-box">
+                        <p class="title">Job Category</p>
+                        <ul>
+                            <li class="list-item1 "><a href="#" class="font-color-black">Web Developer (54)</a></li>
+                            <li class="list-item1 "><a href="#" class="font-color-black">User Experience Design (21)</a>
+                            </li>
+                            <li class="list-item1 "><a href="#" class="font-color-black">Digital Marketer (72)</a></li>
+                            <li class="list-item1 "><a href="#" class="font-color-black">Branding and promotion (54)</a>
+                            </li>
+                            <li class="list-item1 "><a href="#" class="font-color-black">User Experience Design (21)</a>
+                            </li>
+                            <li class="list-item1 "><a href="#" class="font-color-black">Digital Marketer (72)</a></li>
+                        </ul>
+                    </div>
+                    <div class="Job-Nature-box">
+                        <p class="title">Job Nature</p>
+                        <ul>
+                            <li class="list-item1 "><a href="#" class="font-color-black">Full Time jobs</a></li>
+                            <li class="list-item1 "><a href="#" class="font-color-black">Part Time jobs</a></li>
+                            <li class="list-item1 "><a href="#" class="font-color-black">Hourly</a></li>
+                        </ul>
+                    </div>
+                    <div class="Salary-Range-box">
+                        <p class="title">Salary Range</p>
+                        <p>
+                            <input type="text" id="amount1" class="salery-range"> <i class="fa fa-minus minus"></i>
+                            <input type="text" id="amount2" class="salery-range">
+                        </p>
+                        <div id="slider-range"></div>
+                        <p class="small-title">Experience Level</p>
+                        <form action="#" class="search-box_search_form">
+                            <select class="dropdown_item_select search-box_search_input">
+                                <option>Select experience level</option>
+                                <option>Select experience level1</option>
+                                <option>Select experience level2</option>
+                            </select>
+                            <p class="small-title">Location</p>
+                            <input class="search-box_search_input Location " placeholder="Location" required="required"
+                                type="search">
+                            <span class="fa fa-map-marker location-icone"></span>
+                        </form>
+                    </div>
+                    <div class="Industry-box">
+                        <p class="title">Industry</p>
+                        <ul>
+                            <li class="deactivate"><a href="#" class="font-color-black">Full Time jobs</a></li>
+                            <li class="list-item1 "><a href="#" class="font-color-black">Part Time jobs</a></li>
+                            <li class="list-item1 "><a href="#" class="font-color-black">Hourly</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="col-lg-8 col-md-12">
                     <div class="detail width-100 ">
                         <div class="media display-inline text-align-center">
@@ -232,7 +284,6 @@
 
 
     <%-include('common/footer')%>
-   
 
 
     <div class="modal" id="myModal">

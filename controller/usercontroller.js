@@ -91,6 +91,12 @@ const contact=(req,res)=>{
     })
 }
 
+const about=(req,res)=>{
+    res.render('./user/about',{
+        title:"About page"
+    })
+}
+
 module.exports = {
     index,
     job,
@@ -99,5 +105,6 @@ module.exports = {
     postjob,
     postcreate,
     login,
-    contact
+    contact,
+    about
 }

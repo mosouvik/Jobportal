@@ -9,7 +9,7 @@ Route.post('/registercreate',UserController.registercreate);
 Route.get('/login',UserController.login);
 Route.get('/postjob',UserController.postjob);
 Route.post('/postcreate',UserController.postcreate)
-
+Route.get('/about',UserController.about);
 Route.get('/contact',UserController.contact)
 
 
