@@ -21,11 +21,21 @@
             
             <div class="vertical-space-60"></div>
             <div class="job-post-box">
-                <form action="/registercreate" method="post" enctype="multipart/form-data">                 
+                <form action="/logincreate" method="post" >
+                    <%if(message.length>0){%>
+                        <div class="alert alert-success" role="alert">
+                            <%=message%>
+                          </div>
+                          <%}%>
+                          <%if(error.length>0){%>
+                            <div class="alert alert-danger" role="alert">
+                                <%=error%>
+                              </div>
+                              <%}%>                 
                        <div class="col-lg-6 col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputCompany">Email</label>
-                                <input type="email" class="form-control" name="email"
+                                <input type="email" class="form-control" name="email" value="<%=data1.email%>"
                                     placeholder="Enter your email" required />
                             </div>                    
                     </div>
@@ -33,17 +43,19 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputCompany">Password</label>
-                                    <input type="password" class="form-control" name="password"
+                                    <input type="password" class="form-control" name="password" value="<%=data1.password%>"
                                         placeholder="Enter your password" required />
                                 </div>
                          
                                 
                     
                     
-                    
+                                <input type="checkbox" name="rememberme">
+                                <label>Keep me logged in</label><br>
                    
                     
                     <button type="submit" class="btn Post-Job-Offer">Sign in</button>
+                    
                 </form>
             </div>
         </div>

@@ -12,6 +12,10 @@
                                 <img src="imags/logo.png" class="logo-text" alt="">
                             </a>
                         </div>
+                        
+                        
+
+                        <%if(!data){%>
                         <nav class="main_nav_contaner ml-auto">
                             <ul class="main_nav">
                                 <li><a href="/">Home</a></li>
@@ -37,11 +41,45 @@
                                 <i class="large material-icons font-color-white menu_mm menu-vertical">menu</i>
                             </div>
                         </nav>
+                        <%}else{%>
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    <li><a href="/">Home</a></li>
+                                   <li><a href="/job">Job</a></li>
+                                    <li><a href="blog_page.html">Applied Jobs</a></li>
+                                    <li><a href="/about">About</a></li>
+                                    <li><a href="/contact">Contact</a></li>
+    
+                                </ul>
+                                <div class=" Post-Jobs">
+                                    <a href="/postjob" class="">
+                                        Post Jobs
+                                    </a>
+                                </div>
+                               <ul class="main_nav">
+                                <li></li>
+                                
+                               </ul>
+                               
+                                <ul class="main_nav">
+                                    <li style="color: white;">Welcome <%=data.name%> </li>
+                                     <li><img class="img-profile rounded-circle" height="40px" width="40px" src="/<%=data.pic%>" alt="img"></li>
+                                    <li><a href="/logout">Logout</a></li>
+                                </ul>
+                                <div class="hamburger menu_mm menu-vertical">
+                                    <i class="large material-icons font-color-white menu_mm menu-vertical">menu</i>
+                                </div>
+                            </nav>
+                            <%}%>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
 
     <div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
         <div class="menu_close_container">

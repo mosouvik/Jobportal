@@ -5,6 +5,10 @@ const postschema = new schema({
         type: String,
         required: true
     },
+    emp_id:{
+        type:schema.Types.ObjectId,
+        ref:'user'
+    },
     company: {
         type: String,
         required: true
@@ -29,17 +33,26 @@ const postschema = new schema({
         type: String,
         required: true
     },
+    category:{
+        type:String,
+        required:true
+    },
     job_nature: {
         type: String,
         required: true
     },
+    
+    deadline: {
+        type: Date,
+        required: true
+    },
+    status:{
+        type:Boolean,
+        default:true
+    },
     createdAt: {
         type: Date,
         default: Date.now
-    },
-    deadline: {
-        type: String,
-        required: true
     }
 
 })

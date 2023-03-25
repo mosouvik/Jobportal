@@ -13,10 +13,36 @@
             <div class="vertical-space-60"></div>
             <div class="job-post-box">
                 <form action="/postcreate" method="post" enctype="multipart/form-data">
+                    <%if(message.length>0){%>
+                    <div class="alert alert-success" role="alert">
+                        <%=message%>
+                      </div>
+                      <%}%>
+                      <%if(error.length>0){%>
+                        <div class="alert alert-danger" role="alert">
+                            <%=error%>
+                          </div>
+                          <%}%>
                     <div class="form-group">
                         <label for="exampleInputJobtitle">Job title</label>
                         <input type="text" class="form-control" id="exampleInputJobtitle"
                             placeholder="Enter your job title" name="jobtitle" required />
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="form-group mybtn" id="Job-Nature">
+                            <label>Job Category</label>
+                            <select class="custom-select" name="category">
+                                <option selected>Select category</option>
+                                <option value="Education-Training">Education & Training</option>
+                                <option value="Sales-Marketing">Sales and Marketing</option>
+                                <option value="Computer-Programing">Computer Programing</option>
+                                <option value="Customer-Support">Customer Support</option>
+                                <option value="Design-Multimedia">Design & Multimedia</option>
+                                <option value="Web-Development">Web Development</option>
+                                <option value="Medical-Pharma">Medical/Pharma</option>
+                                <option value="Engineer-Architects">Engineer/Architects</option>
+                              </select>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
@@ -81,7 +107,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Dead Line</label>
-                            <input type="text" name="deadline">
+                            <input type="date" name="deadline">
                         </div>
                     </div>
                     <div class="form-group">

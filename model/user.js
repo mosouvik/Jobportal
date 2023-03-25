@@ -34,6 +34,14 @@ const Userschema=new schema({
         type:Boolean,
         default:false
       },
+      status:{
+        type:Boolean,
+        default:true
+      },
+      createdAt:{
+        type:Date,
+        default:Date.now
+      }
 })
 const UserModel=monggose.model('user',Userschema)
 module.exports=UserModel

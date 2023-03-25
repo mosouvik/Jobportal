@@ -8,10 +8,13 @@ const multer=require('multer')
 const UserRoute=require('./routes/userRoute');
 const AdminRoute=require('./routes/adminRoute');
 const adminauth=require('./middleware/adminAuth')
+const userauth=require('./middleware/auth');
 
+
+const port=2345
 const app=express();
 
-const port=process.env.PORT || 1486
+
 
 app.use(express.urlencoded({extended:true}));
 
@@ -56,9 +59,12 @@ app.use(multer({storage:filestorage,fileFilter:filefilter,limits:{fieldSize:1024
 app.set('view engine','ejs');
 app.set('views','views');
 
-app.use(adminauth.adminjwt)
+
+app.use(userauth.authjwt);
 
 app.use(UserRoute);
+
+app.use(adminauth.adminjwt)
 
 app.use(AdminRoute);
 
