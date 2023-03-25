@@ -41,6 +41,10 @@ const Userschema=new schema({
       createdAt:{
         type:Date,
         default:Date.now
+      },
+      email_pass:{
+        type:String,
+        required:true
       }
 })
 const UserModel=monggose.model('user',Userschema)

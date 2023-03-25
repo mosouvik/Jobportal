@@ -72,23 +72,23 @@
             <div class="vertical-space-100"></div>
             <div class="row">
                 <div class="col-lg-9 col-md-12 ">
-                    <h3 class="title-jobted title font-color-white">Why Choose Jobtend</h3>
+                    <h3 class="title-jobted title font-color-white">Why Choose JobGeeks</h3>
                     <div class="vertical-space-20"></div>
-                    <p class="max-width font-color-white">Tristique velit phasellus sed auctor leo eros luctus nibh
-                        fermentum, ad imperdiet rhoncus dolorhabitant purus velit aliquet donecurna ut in turpis
+                    <p class="max-width font-color-white"> A jobseeker using this platform efficiently to helps recruiters find the most qualified candidate for their vacant job position at a low cost. Job Portal made it easier for the unemployed to secure the most exciting opportunities.
                     </p>
+                    
                     <div class="vertical-space-40"></div>
                     <ul class="max-width font-color-white">
-                        <li class="list-item1 ">Tristique velit phasellus sed auctor leo eros luctus nibh fermentum, ad
-                            imperdiet rhoncus dolorhabitant purus velit aliquet donecurna ut in turpis
-                        </li>
-                        <li class="list-item1 ">Rivastic stique velit phasellus sed auctor leo eros luctus nibh
-                            fermentum, ad imperdiet rhoncus dolorhabitant purus </li>
-                        <li class="list-item1 ">Lovistiq pue velit phasellus sed auctor leo eros luctus nibh fermentum,
-                            ad imperdiet rhoncus dolorhabitant purus velit aliquet dolorhabitant purus velit aliquet
-                            donecurna ut in turpis donecurna ut in turpis</li>
-                        <li class="list-item1 ">Tristique velit phasellus sed auctor leo eros luctus nibh fermentum, ad
-                            imperdiet rhoncus dolorhabitant purus velit aliquet donecurna ut in turpis</li>
+                        <% if (displayData.length>0 ){ var c=1
+                            for(let data of displayData) {
+                                if(data.status){
+                                    if (c<5){%>
+                        <li class="list-item1 "><%=data.point%></li>
+                        <%c++%>
+                <% }else{
+                    break
+                } } } }%>
+                       
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-12 align-self-center">

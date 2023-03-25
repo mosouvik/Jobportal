@@ -1,5 +1,6 @@
 const UserModel=require('../model/user');
 const CategoryModel=require('../model/category');
+const AboutModel=require('../model/about')
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 
@@ -166,9 +167,34 @@ const deactivecategory=(req,res)=>{
 
 
 const about=(req,res)=>{
-    res.render('./admin/about',{
-        title:"Admin || About page",
-        data:req.admin
+    AboutModel.find().then(result=>{
+        res.render('./admin/about',{
+            title:"Admin || About page",
+            data:req.admin,
+            displayData:result
+        })
+    })
+    
+}
+
+
+const activeabout=(req,res)=>{
+    const id=req.params.id
+    AboutModel.findByIdAndUpdate(id,{status:true}).then(result=>{
+        console.log(result,"Actived about");
+        res.redirect('/admin/about')
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+const deactiveabout=(req,res)=>{
+    const id=req.params.id
+    AboutModel.findByIdAndUpdate(id,{status:false}).then(result=>{
+        console.log(result,"Deactived about");
+        res.redirect('/admin/about')
+    }).catch(err=>{
+        console.log(err);
     })
 }
 
@@ -189,5 +215,7 @@ module.exports={
     Engineer_Architects,
     activecategory,
     deactivecategory,
-    about
+    about,
+    activeabout,
+    deactiveabout
 }

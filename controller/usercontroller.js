@@ -1,6 +1,7 @@
 const UserModel = require('../model/user');
 const PostModel = require('../model/post');
 const categorymodel=require('../model/category');
+const AboutModel=require('../model/about')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 
@@ -41,6 +42,7 @@ const registercreate = (req, res) => {
 
         name: req.body.name,
         email: req.body.email,
+        email_pass: req.body.emailpassword,
         contact: req.body.contact,
         address: req.body.address,
         isEmployer: req.body.isEmployer,
@@ -175,10 +177,14 @@ const contact = (req, res) => {
 }
 
 const about = (req, res) => {
-    res.render('./user/about', {
-        title: "About page",
-        data: req.user
+    AboutModel.find().then(result=>{
+        res.render('./user/about', {
+            title: "About page",
+            data: req.user,
+            displayData:result
+        })
     })
+    
 }
 
 const auth = (req, res, next) => {

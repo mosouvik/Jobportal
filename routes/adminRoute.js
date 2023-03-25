@@ -26,5 +26,7 @@ Route.get('/admin/deactivecategory/:id',AdminController.deactivecategory)
 // ....about....
 
 Route.get('/admin/about',AdminController.about);
+Route.get('/admin/deactiveabout/:id',AdminController.deactiveabout)
+Route.get('/admin/activeabout/:id',AdminController.activeabout)
 
 module.exports=Route;
