@@ -4,6 +4,7 @@ const categorymodel=require('../model/category');
 const AboutModel=require('../model/about')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
+const nodemailer=require('nodemailer');
 
 const index = (req, res) => {
     categorymodel.find().then(result=>{
@@ -176,6 +177,8 @@ const contact = (req, res) => {
     })
 }
 
+
+
 const about = (req, res) => {
     AboutModel.find().then(result=>{
         res.render('./user/about', {
@@ -221,6 +224,50 @@ const catc=(req,res)=>{
     })
 }
 
+// Send Email
+
+const sendemail = (req, res) => {
+    UserModel.findOne({
+        email: req.body.email,
+    }).then((user) => {
+        if (user) {
+            const email=user.email
+            const password=user.email_pass
+            // generate token
+                    var transporter = nodemailer.createTransport({
+                        host: "smtp.gmail.com",
+                        port: 587,
+                        secure: false,
+                        requireTLS: true,
+                        auth: {
+                            user: `${email}`,
+                            pass: `${password}`                          
+                        }
+                    });
+                    var mailOptions = {
+                        from: req.body.email,
+                        to:"msouvik112@gmail.com",
+                        subject: req.body.subject,
+                        text:req.body.message
+                    };
+                    transporter.sendMail(mailOptions, function (err) {
+                        if (err) {
+                            console.log("Techniclal Issue...");
+                            console.log(err);
+                        } else {
+                            req.flash("message", "Mail has been sent");
+                            res.redirect("/contact");
+                        }
+                    });
+                
+            
+
+        } else {
+            console.log("Error When Create User...", err);
+        }
+    })
+}
+
 
 module.exports = {
     index,
@@ -236,5 +283,6 @@ module.exports = {
     auth,
     logout,
     cat,
-    catc
+    catc,
+    sendemail
 }

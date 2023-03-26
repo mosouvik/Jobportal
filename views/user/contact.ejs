@@ -5,8 +5,9 @@
 
 
     <section id="Contact_us">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.102144905603!2d88.4254925755468!3d22.57528268013591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275927b0061ad%3A0x496c2fab98874c86!2sWebskitters%20Technology%20Solutions%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1679809634324!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <div id="map" style="width: 100%;
-         height: 100vh"></div>
+         height: 50vh"></div>
     </section>
 
 
@@ -15,38 +16,38 @@
             <div class="Get-in-Touch-box">
                 <h3 class="text-left">Get in Touch</h3>
                 <div class="vertical-space-5"></div>
-                <p class="text-left">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida sodales luctus
-                    nulla</p>
+                <p class="text-left">Want to contact admin send an email
+                </p>
                 <div class="vertical-space-40"></div>
-                <form>
+                <form action="/sendemail" method="post">
                     <div class="row">
                         <div class=" col-lg-6 col-md-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Full name" required />
+                                <input type="text" class="form-control" name="name" placeholder="Full name" required />
                                 <span class="fa fa-user icone "></span>
                             </div>
                         </div>
                         <div class=" col-lg-6 col-md-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Subject" required />
+                                <input type="text" class="form-control" name="subject" placeholder="Subject" required />
                                 <span class="fa fa-file icone "></span>
                             </div>
                         </div>
                         <div class=" col-lg-6 col-md-12">
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email address" required />
+                                <input type="email" class="form-control" name="email" placeholder="Email address" required />
                                 <span class="fa fa-envelope icone "></span>
                             </div>
                         </div>
                         <div class=" col-lg-6 col-md-12">
                             <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Phone number" required />
+                                <input type="tel" class="form-control" name="contact" placeholder="Phone number" required />
                                 <span class="fa fa-phone icone "></span>
                             </div>
                         </div>
                         <div class=" col-lg-12 col-md-12">
                             <div class="form-group">
-                                <textarea class="form-control" placeholder="Messege" rows="3" required></textarea>
+                                <textarea class="form-control" name="message" placeholder="Messege" rows="3" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -68,7 +69,7 @@
     <script src="js/jquery-ui.min.js"></script>
 
     <script src="js/custom.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap">
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"> -->
     </script>
 </body>
 

@@ -20,4 +20,7 @@ Route.get('/cat',UserController.cat)
 Route.post('/catc',UserController.catc)
 
 
+// Contact
+Route.post('/sendemail',UserController.auth,UserController.sendemail)
+
 module.exports=Route
