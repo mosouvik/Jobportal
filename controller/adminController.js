@@ -1,4 +1,5 @@
 const UserModel=require('../model/user');
+const PostModel=require('../model/post')
 const CategoryModel=require('../model/category');
 const AboutModel=require('../model/about')
 const bcrypt=require('bcryptjs');
@@ -51,10 +52,23 @@ const logincreate=(req,res)=>{
 }
 
 const dashboard=(req,res)=>{
-    res.render('./admin/dashboard',{
-        title:"Admin || Dashboard",
-       data: req.admin
+    PostModel.aggregate([
+        {$lookup:{
+            from:"employers",
+            localField:"emp_id",
+            foreignField:"_id",
+            as:"emp_details"
+        }
+    }
+    ]).then(result=>{
+        console.log(result);
+        res.render('./admin/dashboard',{
+            title:"Admin || Dashboard",
+           data: req.admin,
+           displayData:result
+        })
     })
+    
 }
 
 const adminauth=(req,res,next)=>{
@@ -75,6 +89,36 @@ const logout=(req,res)=>{
    res.redirect('/admin/')
 }
 
+
+const jobseeker=(req,res)=>{
+UserModel.find().then(result=>{
+    res.render('./admin/jobseeker',{
+        title:"Jobseeker",
+        data:req.admin,
+        displayData:result
+    })
+})
+}
+
+const deactivejobseeker=(req,res)=>{
+    const id=req.params.id
+    UserModel.findByIdAndUpdate(id,{status:false}).then(result=>{
+        console.log(result,"Deactived jobseeker");
+        res.redirect('/admin/jobseeker')
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+const activejobseeker=(req,res)=>{
+    const id=req.params.id
+    UserModel.findByIdAndUpdate(id,{status:true}).then(result=>{
+        console.log(result,"Deactived jobseeker");
+        res.redirect('/admin/jobseeker')
+    }).catch(err=>{
+        console.log(err);
+    })
+}
 const jobcategory=(req,res)=>{
      CategoryModel.find().then(result=>{
         res.render('./admin/jobcategory',{
@@ -198,12 +242,31 @@ const deactiveabout=(req,res)=>{
     })
 }
 
+//.....ac/dc post
+const activejob=(req,res)=>{
+    const post_id=req.params.id
+    PostModel.findByIdAndUpdate(post_id,{status:true}).then(result=>{
+        res.redirect('/admin/dashboard')
+    }
+    )
+}
+const deactivejob=(req,res)=>{
+    const post_id=req.params.id
+    PostModel.findByIdAndUpdate(post_id,{status:false}).then(result=>{
+        res.redirect('/admin/dashboard')
+    }
+    )
+}
+
 module.exports={
     login,
     logincreate,
     dashboard,
     adminauth,
     logout,
+    jobseeker,
+    activejobseeker,
+    deactivejobseeker,
     jobcategory,
     Education_Training,
     SalesandMarketing,
@@ -217,5 +280,7 @@ module.exports={
     deactivecategory,
     about,
     activeabout,
-    deactiveabout
+    deactiveabout,
+    activejob,
+    deactivejob
 }

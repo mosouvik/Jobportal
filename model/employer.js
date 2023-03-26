@@ -1,6 +1,6 @@
 const monggose=require('mongoose');
 const schema=monggose.Schema;
-const Userschema=new schema({
+const Employerschema=new schema({
   
       name:{
         type:String,
@@ -22,15 +22,16 @@ const Userschema=new schema({
         type:String,
         required:true
       },
-     
+      
       password:{
         type:String,
         required:true
       },
-      isAdmin:{
+      isEmployer:{
         type:Boolean,
-        default:false
+        default:true
       },
+      
       status:{
         type:Boolean,
         default:true
@@ -44,5 +45,5 @@ const Userschema=new schema({
         required:true
       }
 })
-const UserModel=monggose.model('user',Userschema)
-module.exports=UserModel
+const EmployerModel=monggose.model('employer',Employerschema)
+module.exports=EmployerModel

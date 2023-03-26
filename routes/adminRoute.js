@@ -14,6 +14,7 @@ Route.get('/admin/Design_Multimedia',AdminController.Design_Multimedia);
 Route.get('/admin/WebDevelopment',AdminController.WebDevelopment);
 Route.get('/admin/Medical_Pharma',AdminController.Medical_Pharma);
 Route.get('/admin/Engineer_Architects',AdminController.Engineer_Architects);
+Route.get('/admin/jobseeker',AdminController.jobseeker)
 
 Route.get('/admin/logout',AdminController.logout)
 
@@ -28,5 +29,13 @@ Route.get('/admin/deactivecategory/:id',AdminController.deactivecategory)
 Route.get('/admin/about',AdminController.about);
 Route.get('/admin/deactiveabout/:id',AdminController.deactiveabout)
 Route.get('/admin/activeabout/:id',AdminController.activeabout)
+
+//....ac/dc post
+Route.get('/admin/activejob/:id',AdminController.activejob)
+Route.get('/admin/deactivejob/:id',AdminController.deactivejob)
+
+//.....ac/dc jobseeker
+Route.get('/admin/deactivejobseeker/:id',AdminController.deactivejobseeker)
+Route.get('/admin/activejobseeker/:id',AdminController.activejobseeker)
 
 module.exports=Route;

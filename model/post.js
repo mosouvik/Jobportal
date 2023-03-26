@@ -6,8 +6,8 @@ const postschema = new schema({
         required: true
     },
     emp_id:{
-        type:schema.Types.ObjectId,
-        ref:'user'
+        type:String,
+        required:true
     },
     company: {
         type: String,

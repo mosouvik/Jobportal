@@ -1,4 +1,5 @@
 const UserModel = require('../model/user');
+const EmployerModel=require('../model/employer')
 const PostModel = require('../model/post');
 const categorymodel=require('../model/category');
 const AboutModel=require('../model/about')
@@ -22,14 +23,26 @@ const index = (req, res) => {
 }
 
 const job = (req, res) => {
-    res.render('./user/job', {
-        title: "job list page",
-        data: req.user
+    PostModel.find().then(result=>{
+        res.render('./user/job', {
+            title: "job list page",
+            data: req.user,
+            displayData:result
+        })
     })
+   
 }
 
 const register = (req, res) => {
     res.render('./user/register', {
+        title: " register page",
+        message: req.flash('message'),
+        error: req.flash('error'),
+        data: req.user
+    })
+}
+const register_emp=(req,res)=>{
+    res.render('./user/register_emp', {
         title: " register page",
         message: req.flash('message'),
         error: req.flash('error'),
@@ -46,7 +59,6 @@ const registercreate = (req, res) => {
         email_pass: req.body.emailpassword,
         contact: req.body.contact,
         address: req.body.address,
-        isEmployer: req.body.isEmployer,
         password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
         image: image.path
     })
@@ -63,11 +75,48 @@ const registercreate = (req, res) => {
     })
 }
 
+
+const registercreate_emp = (req, res) => {
+    const image = req.file
+    const userdata = new EmployerModel({
+
+        name: req.body.name,
+        email: req.body.email,
+        email_pass: req.body.emailpassword,
+        contact: req.body.contact,
+        address: req.body.address,
+        password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+        image: image.path
+    })
+    userdata.save().then(data => {
+        console.log(data, "Registration added successfully");
+        req.flash('message', "Registration successfull..")
+        res.redirect('/login')
+    }).catch(err => {
+        console.log(err);
+        req.flash('error', "Registration unsuccessfull..")
+        // req.flash('alert', 'alert-danger')
+
+        res.redirect('/register')
+    })
+}
 const login = (req, res) => {
     loginData={}
     loginData.email=(req.cookies.email )? req.cookies.email :undefined,
     loginData.password=(req.cookies.password) ? req.cookies.password :undefined,
     res.render('./user/login', {
+        title: "login page",
+        message: req.flash('message'),
+        error: req.flash('error'),
+        data1:loginData,
+        data: req.user
+    })
+}
+const login_emp = (req, res) => {
+    loginData={}
+    loginData.email=(req.cookies.email )? req.cookies.email :undefined,
+    loginData.password=(req.cookies.password) ? req.cookies.password :undefined,
+    res.render('./user/login_emp', {
         title: "login page",
         message: req.flash('message'),
         error: req.flash('error'),
@@ -82,13 +131,13 @@ const logincreate = (req, res) => {
     }, (err, data) => {
 
         if (data) {
+            if(data.status){
             const haspassword = data.password
 
             if (bcrypt.compareSync(req.body.password, haspassword)) {
                 const token = jwt.sign({
                     id: data._id,
                     name: data.name,
-                    isEmployer: data.isEmployer,
                     pic: data.image
                 }, 'souvikmondalhelowelcome@123456789', { expiresIn: '10m' })
                 res.cookie('userToken', token)
@@ -98,14 +147,57 @@ const logincreate = (req, res) => {
                 }
                 console.log(data, "login successfully");
 
-                if (data.isEmployer == 'employer') {
+                
                     req.flash('message', "Login successfully..")
 
-                    res.redirect('/postjob')
-                } else {
-                    req.flash('message', "Login successfully..")
                     res.redirect('/')
+                
+
+            } else {
+                console.log("password incorect");
+                req.flash('error', "Password Incorrect")
+                res.redirect('/login')
+            }
+
+        }else{
+            req.flash('error','Admin has blocked your account')
+            res.redirect('/login')
+        }
+        } else {
+            console.log("invalid email");
+            req.flash('error', "No User found with thet email")
+            res.redirect('/login')
+        }
+    })
+}
+
+const logincreate_emp = (req, res) => {
+    EmployerModel.findOne({
+        email: req.body.email
+    }, (err, data) => {
+
+        if (data) {
+            const haspassword = data.password
+
+            if (bcrypt.compareSync(req.body.password, haspassword)) {
+                const token = jwt.sign({
+                    id: data._id,
+                    name: data.name,
+                    isEmployer:true,
+                    pic: data.image
+                }, 'souvikmondalhelowelcome@123456789', { expiresIn: '10m' })
+                res.cookie('userToken', token)
+                if (req.body.rememberme) {
+                    res.cookie('email', req.body.email);
+                    res.cookie('password', req.body.password)
                 }
+                console.log(data, "login successfully");
+
+                
+                    req.flash('message', "Login successfully..")
+
+                    res.redirect('/')
+                
 
             } else {
                 console.log("password incorect");
@@ -123,8 +215,8 @@ const logincreate = (req, res) => {
 
 
 const postjob = (req, res) => {
-    const emp_type = req.user.isEmployer
-    if (emp_type == 'employer') {
+    const emp_status = req.user.isEmployer
+    if (emp_status) {
         res.render('./user/postjob', {
             title: "Post job page",
             message: req.flash('message'),
@@ -268,6 +360,134 @@ const sendemail = (req, res) => {
     })
 }
 
+//,.,..Category
+
+const Education_Training=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"category":"Education-Training"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Education-Training",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+const Medical_Pharma=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"category":"Medical-Pharma"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Medical_Pharma",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+
+const Computer_Programing=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"category":"Computer-Programing"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Computer-Programing",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+
+const Customer_Support=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"category":"Customer-Support"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Customer-Support",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+
+const Design_Multimedia=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"category":"Design-Multimedia"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Design-Multimedia",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+const Web_Development=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"category":"Web-Development"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Web-Development",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+const Engineer_Architects=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"category":"Engineer-Architects"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Engineer-Architects",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+const Sales_Marketing=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"category":"Sales-Marketing"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Sales-Marketing",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+
+const Full_Time=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"job_nature":"Full-Time"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Full-Time",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+const Part_Time=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"job_nature":"Part-Time"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Part-Time",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+const Freelancer=(req,res)=>{
+    PostModel.aggregate([{
+        $match:{"job_nature":"Freelancer"}
+    }]).then(result=>{
+        res.render('./user/job',{
+            title:"Freelancer",
+            data:req.user,
+            displayData:result
+        })
+    })
+}
+
 
 module.exports = {
     index,
@@ -284,5 +504,20 @@ module.exports = {
     logout,
     cat,
     catc,
-    sendemail
+    sendemail,
+    register_emp,
+    logincreate_emp,
+    registercreate_emp,
+    login_emp,
+    Education_Training,
+    Medical_Pharma,
+    Computer_Programing,
+    Customer_Support,
+    Design_Multimedia,
+    Web_Development,
+    Engineer_Architects,
+    Sales_Marketing,
+    Full_Time,
+    Part_Time,
+    Freelancer
 }
