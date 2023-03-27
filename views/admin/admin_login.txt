@@ -1,2 +1,2 @@
 email:- msouvik112@gmail.com
-pass:- 12345
+pass:- 123456

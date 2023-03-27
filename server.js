@@ -52,7 +52,7 @@ const filefilter=(req,file,cb)=>{
     }
 }
 
-// steap-4.... file upload.
+// step-4...... file upload.
 app.use(multer({storage:filestorage,fileFilter:filefilter,limits:{fieldSize:1024*1024*5}}).single('image'))
 
 
