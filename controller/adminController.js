@@ -132,62 +132,6 @@ const jobcategory=(req,res)=>{
     
 }
 
-const Education_Training=(req,res)=>{
-    res.render('./admin/Education_Training',{
-        title:"Admin || Education & Training page ",
-        data:req.admin
-    })
-}
-const SalesandMarketing=(req,res)=>{
-    res.render('./admin/SalesandMarketing',{
-        title:"Admin || Salesand Marketing page ",
-        data:req.admin
-    })
-}
-const ComputerPrograming=(req,res)=>{
-    res.render('./admin/ComputerPrograming',{
-        title:"Admin || Computer Programing page ",
-        data:req.admin
-    })
-}
-
-const CustomerSupport=(req,res)=>{
-    res.render('./admin/CustomerSupport',{
-        title:"Admin || Customer Support page ",
-        data:req.admin
-    })
-}
-
-const Design_Multimedia=(req,res)=>{
-    res.render('./admin/Design&Multimedia',{
-        title:"Admin || Design_Multimedia page ",
-        data:req.admin
-    })
-}
-
-const WebDevelopment=(req,res)=>{
-    res.render('./admin/WebDevelopment',{
-        title:"Admin || Web Development page ",
-        data:req.admin
-    })
-}
-
-const Medical_Pharma=(req,res)=>{
-    res.render('./admin/Medical_Pharma',{
-        title:"Admin ||Medical_Pharma page ",
-        data:req.admin
-    })
-}
-
-const Engineer_Architects=(req,res)=>{
-    res.render('./admin/Engineer_Architect',{
-        title:"Admin ||Engineer_Architects page ",
-        data:req.admin
-    })
-}
-
-
-
 
 const activecategory=(req,res)=>{
     const id=req.params.id
@@ -281,14 +225,6 @@ module.exports={
     activejobseeker,
     deactivejobseeker,
     jobcategory,
-    Education_Training,
-    SalesandMarketing,
-    ComputerPrograming,
-    CustomerSupport,
-    Design_Multimedia,
-    WebDevelopment,
-    Medical_Pharma,
-    Engineer_Architects,
     activecategory,
     deactivecategory,
     about,
