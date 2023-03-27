@@ -73,108 +73,26 @@
             <p class="max-width">Here are some list of recent jobs posted by recruiters
             </p>
             <div class="vertical-space-60"></div>
+            <% if(displayData2.length>0){
+                for(let data3 of displayData2){ %>
             <div class="detail">
                 <div class="media display-inline text-align-center">
-                    <img src="imags/job-post-icone-1.png" alt="John Doe" class="mr-3 ">
+                    <img src="<%=data3.image%>" height="50px" width="50px" alt="image" class="mr-3 ">
                     <div class="media-body text-left  text-align-center">
-                        <h6>Jopitar looking for a senior UX Designer</h6>
+                        <h6><%=data3.jobtitle%></h6>
                         <i class="large material-icons">account_balance</i>
-                        <span class="text">Jopitar inc.</span>
+                        <span class="text"><%=data3.company%></span>
                         <br />
                         <i class="large material-icons">place</i>
-                        <span class="text font-size">11907 Doyle Cape Cydneyview</span>
+                        <span class="text font-size"><%=data3.location%></span>
                         <div class="float-right margin-top text-align-center">
-                            <a href="#" class="part-full-time">Part Time</a>
-                            <p class="date-time">Deadline: May 23, 2018</p>
+                            <a href="#" class="part-full-time"><%=data3.job_nature%></a>
+                            <p class="date-time">Deadline: <%=data3.deadline.toDateString()%></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="detail">
-                <div class="media display-inline text-align-center">
-                    <img src="imags/job-post-icone-2.png" alt="John Doe" class="mr-3 ">
-                    <div class="media-body text-left text-align-center">
-                        <h6>Rokital needs Marketing Experts</h6>
-                        <i class="large material-icons">account_balance</i>
-                        <span class="text">Rokitar ltd.</span>
-                        <br />
-                        <i class="large material-icons">place</i>
-                        <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                        <div class="float-right margin-top text-align-center">
-                            <a href="#" class="part-full-time">Full Time</a>
-                            <p class="date-time">Deadline: May 23, 2018</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="media display-inline text-align-center">
-                    <img src="imags/job-post-icone-3.png" alt="John Doe" class="mr-3 ">
-                    <div class="media-body text-left text-align-center">
-                        <h6>Mshape looking for a senior UX Designer</h6>
-                        <i class="large material-icons">account_balance</i>
-                        <span class="text">Mshape inc.</span>
-                        <br />
-                        <i class="large material-icons">place</i>
-                        <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                        <div class="float-right margin-top text-align-center">
-                            <a href="#" class="part-full-time">Full Time</a>
-                            <p class="date-time">Deadline: May 23, 2018</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="media display-inline text-align-center">
-                    <img src="imags/job-post-icone-4.png" alt="John Doe" class="mr-3 ">
-                    <div class="media-body text-left text-align-center">
-                        <h6>Marketing Directer needed</h6>
-                        <i class="large material-icons">account_balance</i>
-                        <span class="text">Scalegoss ltd.</span>
-                        <br />
-                        <i class="large material-icons">place</i>
-                        <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                        <div class="float-right margin-top text-align-center">
-                            <a href="#" class="part-full-time">Part Time</a>
-                            <p class="date-time">Deadline: May 23, 2018</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="detail">
-                <div class="media display-inline text-align-center">
-                    <img src="imags/job-post-icone-5.png" alt="John Doe" class="mr-3 ">
-                    <div class="media-body text-left text-align-center">
-                        <h6>We need a senior Brand Designer</h6>
-                        <i class="large material-icons">account_balance</i>
-                        <span class="text">Supwin inc.</span>
-                        <br />
-                        <i class="large material-icons">place</i>
-                        <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                        <div class="float-right margin-top text-align-center">
-                            <a href="#" class="part-full-time">Freelance</a>
-                            <p class="date-time">Deadline: May 23, 2018</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="vertical-space-20"></div>
-            <div class="job-list">
-                <a href="/job" class="Open-Jobs-Page margin-auto">Open Jobs Page<i
-                        class="large material-icons float-right">trending_flat</i></a>
-                <ul class="pagination justify-content-end margin-auto">
-                    <li class="page-item"><a class="page-link pdding-none" href="javascript:void(0);"><i
-                                class=" material-icons keyboard_arrow_left_right">keyboard_arrow_left</i></a></li>
-                    <li class="page-item"><a class="page-link active" href="javascript:void(0);">1</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-                    <li class="page-item">
-                        <a class="page-link pdding-none" href="javascript:void(0);"> <i
-                                class=" material-icons keyboard_arrow_left_right">keyboard_arrow_right</i></a>
-                    </li>
-                </ul>
-            </div>
+            <% }}%>
         </div>
         <div class="vertical-space-60"></div>
     </section>
@@ -185,201 +103,37 @@
         <div class="container text-center">
             <h3 class="text-center">Featuread Company</h3>
             <div class="vertical-space-30"></div>
-            <p class="max-width">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida, mollis
-                suspendisse pretium dictumst inceptos mattis euismod
+            <p class="max-width">Here are some list of companies you might be interested
             </p>
             <div class="row">
+                
                 <div class="col-xs-12 col-sm-12 col-md-12">
+                    
                     <div class="owl-carousel Featuread-Company-carousel">
+                        <% if(displayData2.length>0){
+                            for(let data3 of displayData2){ %>
                         <a href="#" class="Featuread-Company-item">
+                            
                             <div class="media text-align-center  media1">
-                                <img src="imags/job-post-icone-3.png" alt="John Doe"
+                                <img src="<%=data3.image%>"  alt="image"
                                     class=" Featuread-Company-img margin-auto">
                                 <div class="media-body text-left text-align-center ">
-                                    <h6>Mshape Themes Limited.</h6>
+                                    <h6><%=data3.company%></h6>
                                     <i class="material-icons">account_balance</i>
-                                    <span class="text">Mshape inc.</span>
+                                    <span class="text"><%=data3.company%></span>
                                     <br />
                                     <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
+                                    <span class="text font-size"><%=data3.location%></span>
                                     <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
                                 </div>
                             </div>
+                            
                         </a>
-                        <a href="#" class="Featuread-Company-item">
-                            <div class="media  text-align-center  media1">
-                                <img src="imags/job-post-icone-4.png" alt="John Doe"
-                                    class="margin-auto Featuread-Company-img">
-                                <div class="media-body text-left text-align-center">
-                                    <h6>Scalegoss Limited.</h6>
-                                    <i class="material-icons">account_balance</i>
-                                    <span class="text">Scalegoss inc.</span>
-                                    <br />
-                                    <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                                    <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="Featuread-Company-item">
-                            <div class="media text-align-center   media1">
-                                <img src="imags/job-post-icone-1.png" alt="John Doe"
-                                    class=" Featuread-Company-img margin-auto">
-                                <div class="media-body text-left text-align-center">
-                                    <h6>Jopitar Themes Limited.</h6>
-                                    <i class="material-icons">account_balance</i>
-                                    <span class="text">Jopitar inc.</span>
-                                    <br />
-                                    <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                                    <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="Featuread-Company-item">
-                            <div class="media   text-align-center media1">
-                                <img src="imags/job-post-icone-5.png" alt="John Doe"
-                                    class=" Featuread-Company-img margin-auto">
-                                <div class="media-body text-left text-align-center">
-                                    <h6>Supwin Themes Limited.</h6>
-                                    <i class="material-icons">account_balance</i>
-                                    <span class="text">Supwin inc.</span>
-                                    <br />
-                                    <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                                    <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="Featuread-Company-item">
-                            <div class="media text-align-center   media1">
-                                <img src="imags/job-post-icone-3.png" alt="John Doe"
-                                    class=" Featuread-Company-img margin-auto">
-                                <div class="media-body text-left text-align-center">
-                                    <h6>Mshape Themes Limited.</h6>
-                                    <i class="material-icons">account_balance</i>
-                                    <span class="text">Mshape inc.</span>
-                                    <br />
-                                    <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                                    <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="Featuread-Company-item">
-                            <div class="media  text-align-center  media1">
-                                <img src="imags/job-post-icone-4.png" alt="John Doe"
-                                    class=" Featuread-Company-img margin-auto">
-                                <div class="media-body text-left text-align-center">
-                                    <h6>Scalegoss Themes Limited.</h6>
-                                    <i class="material-icons">account_balance</i>
-                                    <span class="text">Scalegoss inc.</span>
-                                    <br />
-                                    <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                                    <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="Featuread-Company-item">
-                            <div class="media  text-align-center  media1">
-                                <img src="imags/job-post-icone-3.png" alt="John Doe"
-                                    class=" Featuread-Company-img margin-auto">
-                                <div class="media-body text-left text-align-center">
-                                    <h6>Mshape Themes Limited.</h6>
-                                    <i class="material-icons">account_balance</i>
-                                    <span class="text">Mshape inc.</span>
-                                    <br />
-                                    <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                                    <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="Featuread-Company-item">
-                            <div class="media  text-align-center  media1">
-                                <img src="imags/job-post-icone-4.png" alt="John Doe"
-                                    class=" Featuread-Company-img margin-auto">
-                                <div class="media-body text-left text-align-center">
-                                    <h6>Scalegoss Themes Limited.</h6>
-                                    <i class="material-icons">account_balance</i>
-                                    <span class="text">Scalegoss inc.</span>
-                                    <br />
-                                    <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                                    <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="Featuread-Company-item">
-                            <div class="media  text-align-center  media1">
-                                <img src="imags/job-post-icone-1.png" alt="John Doe"
-                                    class=" Featuread-Company-img margin-auto">
-                                <div class="media-body text-left text-align-center">
-                                    <h6>Jopitar Themes Limited.</h6>
-                                    <i class="material-icons">account_balance</i>
-                                    <span class="text">Jopitar inc.</span>
-                                    <br />
-                                    <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                                    <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="Featuread-Company-item">
-                            <div class="media  text-align-center  media1">
-                                <img src="imags/job-post-icone-5.png" alt="John Doe"
-                                    class=" Featuread-Company-img margin-auto">
-                                <div class="media-body text-left text-align-center">
-                                    <h6>Supwin Themes Limited.</h6>
-                                    <i class="material-icons">account_balance</i>
-                                    <span class="text">Supwin inc.</span>
-                                    <br />
-                                    <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                                    <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="Featuread-Company-item">
-                            <div class="media  text-align-center  media1">
-                                <img src="imags/job-post-icone-3.png" alt="John Doe"
-                                    class=" Featuread-Company-img margin-auto">
-                                <div class="media-body text-left text-align-center">
-                                    <h6>Mshape Themes Limited.</h6>
-                                    <i class="material-icons">account_balance</i>
-                                    <span class="text">Mshape inc.</span>
-                                    <br />
-                                    <i class=" material-icons">place</i>
-                                    <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                                    <br />
-                                    <i class=" material-icons">person</i>
-                                    <span class="text font-size font-color-orange">3 Open Position</span>
-                                </div>
-                            </div>
-                        </a>
+                        <% }}%>
                     </div>
+                    
                 </div>
+                
             </div>
             <div class="vertical-space-85"></div>
         </div>

@@ -9,18 +9,23 @@ const nodemailer=require('nodemailer');
 
 const index = (req, res) => {
     categorymodel.find().then(result=>{
-        res.render('./user/index', {
-            title: "home page",
-            message: req.flash('message'),
-            error: req.flash('error'),
-            displayData:result,
-            data: req.user
+        PostModel.find().limit(5).then(result2=>{
+            res.render('./user/index', {
+                title: "home page",
+                message: req.flash('message'),
+                error: req.flash('error'),
+                displayData:result,
+                data: req.user,
+                displayData2:result2
+            })
+        }).catch(err=>{
+            console.log(err);
         })
-    }).catch(err=>{
-        console.log(err);
-    })
-    
-}
+        }).catch(err=>{
+            console.log(err);
+        })
+        
+    }
 
 const job = (req, res) => {
     PostModel.find().then(result=>{
