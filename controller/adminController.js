@@ -192,21 +192,34 @@ const Engineer_Architects=(req,res)=>{
 const activecategory=(req,res)=>{
     const id=req.params.id
     CategoryModel.findByIdAndUpdate(id,{status:true}).then(result=>{
-        console.log(result,"Actived category");
-        res.redirect('/admin/jobcategory')
-    }).catch(err=>{
-        console.log(err);
-    })
+        PostModel.updateMany(
+            {"category":`${result.category}`},
+            {"status":true}).then(result2=>{
+                console.log(result,"Actived category");
+                res.redirect('/admin/jobcategory')
+            }).catch(err=>{
+                console.log(err);
+            })
+            }).catch(err=>{
+                console.log(err);
+            })
+        
 }
 
 const deactivecategory=(req,res)=>{
     const id=req.params.id
     CategoryModel.findByIdAndUpdate(id,{status:false}).then(result=>{
-        console.log(result,"Deactived category");
-        res.redirect('/admin/jobcategory')
-    }).catch(err=>{
-        console.log(err);
-    })
+        PostModel.updateMany(
+            {"category":`${result.category}`},
+            {"status":false}).then(result2=>{
+                console.log(result2,"Actived category");
+                res.redirect('/admin/jobcategory')
+            }).catch(err=>{
+                console.log(err);
+            })
+            }).catch(err=>{
+                console.log(err);
+            })
 }
 
 

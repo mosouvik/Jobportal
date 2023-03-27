@@ -265,7 +265,8 @@ const postcreate = (req, res) => {
 const contact = (req, res) => {
     res.render('./user/contact', {
         title: "contact page",
-        data: req.user
+        data: req.user,
+        message:req.flash('message')
     })
 }
 
@@ -325,7 +326,7 @@ const sendemail = (req, res) => {
         if (user) {
             const email=user.email
             const password=user.email_pass
-            // generate token
+            
                     var transporter = nodemailer.createTransport({
                         host: "smtp.gmail.com",
                         port: 587,
@@ -337,10 +338,10 @@ const sendemail = (req, res) => {
                         }
                     });
                     var mailOptions = {
-                        from: req.body.email,
+                        from: req.body.name,
                         to:"msouvik112@gmail.com",
                         subject: req.body.subject,
-                        text:req.body.message
+                        text:req.body.name+' here'+'\n'+req.body.message
                     };
                     transporter.sendMail(mailOptions, function (err) {
                         if (err) {
