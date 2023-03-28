@@ -19,6 +19,7 @@ Route.get('/about',UserController.about);
 Route.get('/contact',UserController.contact)
 Route.get('/logout',UserController.logout);
 Route.get('/register_emp',UserController.register_emp)
+Route.get('/viewjob/:id',UserController.auth,UserController.view_job)
 
 
 Route.get('/cat',UserController.cat)
@@ -42,5 +43,11 @@ Route.get('/Sales-Marketing',UserController.Sales_Marketing)
 Route.get('/Full-Time',UserController.Full_Time)
 Route.get('/Part-Time',UserController.Part_Time)
 Route.get('/Freelancer',UserController.Freelancer)
+
+//....apply
+Route.get('/apply/:id',UserController.auth,UserController.apply)
+
+//...applied jobs
+Route.get('/appliedjobs',UserController.auth,UserController.appliedjobs)
 
 module.exports=Route

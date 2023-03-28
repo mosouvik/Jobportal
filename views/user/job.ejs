@@ -70,7 +70,7 @@
                         <div class="media display-inline text-align-center">
                             <img src="<%=data.image%>" height="50px" width="50px" alt="John Doe" class="mr-3 ">
                             <div class="media-body text-left  text-align-center">
-                                <h6><a href="#" class="font-color-black"><%=data.jobtitle%></a>
+                                <h6><a href="/viewjob/<%=data._id%>" class="font-color-black"><%=data.jobtitle%></a>
                                 </h6>
                                 <i class="large material-icons">account_balance</i>
                                 <span class="text"><%=data.company%></span>
@@ -81,7 +81,7 @@
                                 <span class="text font-size"><%=data.category%></span>
                                 <br>
                                 <div class="float-right margin-top text-align-center">
-                                    <a href="#" class="part-full-time">View</a>
+                                    <a href="/viewjob/<%=data._id%>" class="part-full-time">View</a>
                                     <p class="date-time">Deadline:<%=data.deadline.toDateString()%></p>
                                 </div>
                             </div>

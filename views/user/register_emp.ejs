@@ -29,6 +29,11 @@
                             <%=error%>
                           </div>
                           <%}%>
+                          <%if(message.length>0){%>
+                            <div class="alert alert-success" role="alert">
+                                <%=message%>
+                              </div>
+                              <%}%>
                     <div class="form-group">
                         <label for="exampleInputJobtitle">Name</label>
                         <input type="text" class="form-control" name="name"

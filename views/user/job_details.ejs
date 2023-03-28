@@ -1,0 +1,85 @@
+
+
+
+
+<%-include('common/head')%>
+<body class="background-color-white-drak ">
+
+    <%-include('common/nav')%>
+
+
+    <section id="intro">
+        
+
+        <div class="carousel-item active">
+            <div class="carousel-background"><img src="/imags/slider/slider1.jpg" alt=""></div>
+            <div class="carousel-container">
+                <div class="carousel-content">
+
+                    <h2 class="font-color-white">
+                        <%if(message.length>0){%>
+                            <div class="alert alert-success" role="alert">
+                                <%=message%>
+                              </div>
+                              <%}%>
+                              <%if(error.length>0){%>
+                                <div class="alert alert-danger" role="alert">
+                                    <%=error%>
+                                  </div>
+                                  <%}%>
+                        Job Details</h2>
+
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <section id="job-Details">
+        <input type="hidden" name="pid" value="<%=displayData._id%>">
+        <div class="container background-color-full-white job-Details">
+           
+            <div class="Exclusive-Product">
+                <h3><%=displayData.jobtitle%></h3>
+                <%if(displayData2.length>0){%>
+                    <a href="#" class="Apply-Now">Applied</a>
+                <%}else{%>
+                    <a href="/apply/<%=displayData._id%>" class="Apply-Now">Apply Now</a>
+                <%}%>
+                
+                <h6 class="font-color-orange"><%=displayData.company%></h6>
+                <i class="material-icons">place</i>
+                <span class="text"><%=displayData.location%></span>
+                <h4>Short description</h4>
+                <p><%=displayData.short_des%></p>
+            </div>
+            <img src="/<%=displayData.image%>" height="1000px" width="70x" alt="" class="job-detail-img">
+            <div class="Job-Description">
+                
+                
+                <div class="vertical-space-20"></div>
+                <h4>Experience & Requirement</h4>
+                <p class="margin-bottom"><%=displayData.full_des%></p>
+                
+            </div>
+            
+        </div>
+        
+    </section>
+    
+    
+
+    <%-include('common/footer')%>
+
+
+    <script data-cfasync="false" src="/js/email-decode.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+
+    <script src="/js/custom.js"></script>
+</body>
+
+</html>
