@@ -96,13 +96,13 @@ const registercreate_emp = (req, res) => {
     userdata.save().then(data => {
         console.log(data, "Registration added successfully");
         req.flash('message', "Registration successfull..")
-        res.redirect('/login')
+        res.redirect('/login_emp')
     }).catch(err => {
         console.log(err);
         req.flash('error', "Registration unsuccessfull..")
         // req.flash('alert', 'alert-danger')
 
-        res.redirect('/register')
+        res.redirect('/register_emp')
     })
 }
 const login = (req, res) => {
@@ -169,7 +169,7 @@ const logincreate = (req, res) => {
             res.redirect('/login')
         }
         } else {
-            console.log("invalid email");
+            console.log("invalid email hi");
             req.flash('error', "No User found with thet email")
             res.redirect('/login')
         }
@@ -182,6 +182,7 @@ const logincreate_emp = (req, res) => {
     }, (err, data) => {
 
         if (data) {
+            if(data.status){
             const haspassword = data.password
 
             if (bcrypt.compareSync(req.body.password, haspassword)) {
@@ -207,13 +208,18 @@ const logincreate_emp = (req, res) => {
             } else {
                 console.log("password incorect");
                 req.flash('error', "Password Incorrect")
-                res.redirect('/login')
+                res.redirect('/login_emp')
             }
+        }else{
+            req.flash('error','Admin has blocked your account')
+            res.redirect('/login_emp')
+        }
 
+        
         } else {
             console.log("invalid email");
             req.flash('error', "No User found with thet email")
-            res.redirect('/login')
+            res.redirect('/login_emp')
         }
     })
 }
@@ -239,6 +245,7 @@ const postjob = (req, res) => {
 const postcreate = (req, res) => {
     const image = req.file
     const id=req.user.id
+    console.log(id);
     
     const postdata = new PostModel({
 

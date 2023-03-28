@@ -2,6 +2,7 @@ const UserModel=require('../model/user');
 const PostModel=require('../model/post')
 const CategoryModel=require('../model/category');
 const AboutModel=require('../model/about')
+const EmployerModel=require('../model/employer')
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 
@@ -55,8 +56,8 @@ const dashboard=(req,res)=>{
     PostModel.aggregate([
         {$lookup:{
             from:"employers",
-            localField:"emp_id",
-            foreignField:"_id",
+            localField:"name",
+            foreignField:"emp_id",
             as:"emp_details"
         }
     }
@@ -215,6 +216,40 @@ const deactivejob=(req,res)=>{
     )
 }
 
+const employer=(req,res)=>{
+    EmployerModel.find().then(result=>{
+        res.render('./admin/employer',{
+            title:"Employer",
+            data:req.admin,
+            displayData:result
+        })
+    })
+}
+
+const activeemployer=(req,res)=>{
+    const id=req.params.id
+    EmployerModel.findByIdAndUpdate(id,{status:true}).then(result=>{
+        console.log(result,"Deactived employer");
+        res.redirect('/admin/employer')
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+const deactiveemployer=(req,res)=>{
+    const id=req.params.id
+    EmployerModel.findByIdAndUpdate(id,{status:false}).then(result=>{
+        console.log(result,"Deactived employer");
+        res.redirect('/admin/employer')
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+
+
+
+
 module.exports={
     login,
     logincreate,
@@ -231,5 +266,8 @@ module.exports={
     activeabout,
     deactiveabout,
     activejob,
-    deactivejob
+    deactivejob,
+    employer,
+    activeemployer,
+    deactiveemployer
 }
