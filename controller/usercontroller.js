@@ -161,9 +161,7 @@ const logincreate = (req, res) => {
                 } else {
                     req.flash('message', "Login successfully..")
                     res.redirect('/')
-                
-
-                } else {
+                }else {
                     console.log("password incorect");
                     req.flash('error', "Password Incorrect")
                     res.redirect('/login')
@@ -526,7 +524,7 @@ const view_job = (req, res) => {
                 displayData: result,
                 displayData2: result2,
                 message: req.flash('message'),
-                error:req.flash('error')
+                error: req.flash('error')
             })
 
         })
@@ -536,36 +534,36 @@ const view_job = (req, res) => {
 }
 
 const apply = (req, res) => {
-    
+
     const p_id = req.params.id
     console.log(p_id);
     const u_id = req.user.id
-    if(!req.user.isEmployer){
-    PostModel.findById(p_id).then(result => {
-        console.log(result);
-        UserModel.findById(u_id).then(result2 => {
+    if (!req.user.isEmployer) {
+        PostModel.findById(p_id).then(result => {
+            console.log(result);
+            UserModel.findById(u_id).then(result2 => {
 
-            const save_data = new AcitvityModel({
-                user_id: `${result2._id}`,
-                user_name: result2.name,
-                post_id: `${result._id}`,
-                post_title: result.jobtitle,
-                location: result.location,
-                image: `${result.image}`,
-                category: result.category,
-                post_company: result.company,
-                status: true
-            })
-            const data_save = save_data.save().then(result3 => {
-                req.flash('message', "Job Applied Successfully")
-                res.redirect(`/viewjob/${result._id}`)
+                const save_data = new AcitvityModel({
+                    user_id: `${result2._id}`,
+                    user_name: result2.name,
+                    post_id: `${result._id}`,
+                    post_title: result.jobtitle,
+                    location: result.location,
+                    image: `${result.image}`,
+                    category: result.category,
+                    post_company: result.company,
+                    status: true
+                })
+                const data_save = save_data.save().then(result3 => {
+                    req.flash('message', "Job Applied Successfully")
+                    res.redirect(`/viewjob/${result._id}`)
+                })
             })
         })
-    })
-}else{
-    req.flash('error','Employer cannot apply for jobs')
-    res.redirect(`/`)
-}
+    } else {
+        req.flash('error', 'Employer cannot apply for jobs')
+        res.redirect(`/`)
+    }
 }
 
 
@@ -582,8 +580,8 @@ const appliedjobs = (req, res) => {
                 displayData: result
             })
         })
-    }else{
-        req.flash('error',"Employer cannot have applied jobs")
+    } else {
+        req.flash('error', "Employer cannot have applied jobs")
         res.redirect('/')
     }
 }
