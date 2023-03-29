@@ -157,11 +157,8 @@ const logincreate = (req, res) => {
 
                     req.flash('message', "Login successfully..")
 
-                    res.redirect('/postjob')
-                } else {
-                    req.flash('message', "Login successfully..")
                     res.redirect('/')
-                }else {
+                } else {
                     console.log("password incorect");
                     req.flash('error', "Password Incorrect")
                     res.redirect('/login')
@@ -205,7 +202,7 @@ const logincreate_emp = (req, res) => {
 
                     req.flash('message', "Login successfully..")
 
-                    res.redirect('/')
+                    res.redirect('/postjob')
 
 
                 } else {
