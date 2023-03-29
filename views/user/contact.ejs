@@ -18,6 +18,11 @@
                 <div class="vertical-space-5"></div>
                 <p class="text-left">Want to contact admin send an email
                 </p>
+                <%if(message.length>0){%>
+                    <div class="alert alert-success" role="alert">
+                        <%=message%>
+                      </div>
+                      <%}%>
                 <div class="vertical-space-40"></div>
                 <form action="/sendemail" method="post">
                     <div class="row">

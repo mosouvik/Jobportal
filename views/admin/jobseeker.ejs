@@ -30,17 +30,18 @@
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">JobPost DataTables </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Jobseekers DataTables </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Job Title</th>
-                                            <th>Category</th>
-                                            <th>Posted By</th>
-                                            <th>Post date</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Contact</th>
+                                            <th>Address</th>
+                                            <th>Account created</th>
                                             <th>Status</th>
                                             <th>Operation</th>
                                         </tr>
@@ -50,19 +51,20 @@
                                         <%if(displayData.length >0){
                                             for(let data2 of displayData){%>
                                         <tr>
-                                            <td><%=data2.jobtitle%></td>
-                                            <td><%=data2.category%></td>
-                                            <td><%=data2.emp_id%></td>
+                                            <td><%=data2.name%></td>
+                                            <td><%=data2.email%></td>
+                                            <td><%=data2.contact%></td>
+                                            <td><%=data2.address%></td>
                                             <td><%=data2.createdAt.toDateString()%></td>
                                             <td><%=data2.status%></td>
                                             <% if(data2.status) {%>
                                                 <td>
-                                                    <a href=" /admin/deactivejob/<%=data2._id %>" class="btn
+                                                    <a href=" /admin/deactivejobseeker/<%=data2._id %>" class="btn
                                                     btn-danger">Deactive</a>
                                             </td>
                                             <% } else{%>
                                                 <td>
-                                                    <a href="/admin/activejob/<%= data2._id %>"
+                                                    <a href="/admin/activejobseeker/<%= data2._id %>"
                                                         class="btn btn-success">Active</a>
                                                 </td>
                                                 <% } %>

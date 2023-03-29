@@ -1,0 +1,148 @@
+<%-include('common/head')%>
+
+<body>
+
+<%-include('common/nav')%>
+    
+
+
+    <section id="intro">
+        <div class="carousel-item active">
+            <div class="carousel-background"><img src="imags/slider/slider1.jpg" alt=""></div>
+            <div class="carousel-container">
+                <div class="carousel-content">
+                    <h2 class="font-color-white">Find Jobs Now more Easy Way</h2>
+                    <p class="font-color-white">You can select any job from our platform as it provides a wide variety of jobs posted by recruiters from time to time.All the Best </p>
+                    <a href="#" data-toggle="modal" data-target="#myModal"><i
+                            class=" material-icons play">play_arrow</i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+   
+
+
+    <section id="resent-job-post" class="background-color-white-drak">
+        <div class="vertical-space-85"></div>
+        <div class="container text-center">
+            <h4 class="text-left">Filter Jobs Result</h4>
+            <div class="vertical-space-30"></div>
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="Job-Category-box">
+                        <p class="title">Job Category</p>
+                        <ul>
+                            <li class="list-item1 "><a href="/Web-Development" class="font-color-black">Web Developer </a></li>
+                            <li class="list-item1 "><a href="/Education-Training" class="font-color-black">Education & Training </a>
+                            </li>
+                            <li class="list-item1 "><a href="/Computer-Programing" class="font-color-black">Computer Programing</a></li>
+                            <li class="list-item1 "><a href="/Design-Multimedia" class="font-color-black">Design & Multimedia </a>
+                            <li class="list-item1 "><a href="/Sales-Marketing" class="font-color-black">Sales and Marketing </a>
+                            <li class="list-item1 "><a href="/Customer-Support" class="font-color-black">Customer Support </a>
+                            </li>
+                            <li class="list-item1 "><a href="/Medical-Pharma" class="font-color-black">Medical/Pharma </a>
+                            </li>
+                            <li class="list-item1 "><a href="/Engineer-Architects" class="font-color-black">Engineer/Architects </a></li>
+                        </ul>
+                    </div>
+                
+                    
+                
+                        <br><br><br>
+                    <div class="Industry-box">
+                        <p class="title">Job Time</p>
+                        <ul>
+                            <li class="deactivate"><a href="/Full-Time" class="font-color-black">Full Time jobs</a></li>
+                            <li class="list-item1 "><a href="/Part-Time" class="font-color-black">Part Time jobs</a></li>
+                            <li class="list-item1 "><a href="/Freelancer" class="font-color-black">Freelancer</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-8 col-md-12">
+                    
+                    <div class="detail width-100 ">
+                        <%if(displayData.length>0){
+                            for(let data of displayData){%>
+                                <br>
+                                
+                        <div class="media display-inline text-align-center">
+                            <img src="<%=data.image%>" height="50px" width="50px" alt="John Doe" class="mr-3 ">
+                            <div class="media-body text-left  text-align-center">
+                                <h6><a href="/viewjob/<%=data._id%>" class="font-color-black"><%=data.post_title%></a>
+                                </h6>
+                                <i class="large material-icons">account_balance</i>
+                                <span class="text"><%=data.post_company%></span>
+                                <br />
+                                <i class="large material-icons">place</i>
+                                <span class="text font-size"><%=data.location%></span>
+                                <br>
+                                <span class="text font-size"><%=data.category%></span>
+                                <br>
+                                
+                            </div>
+                        </div>
+                        <%}}else{%>
+                                <h2>No Applied Jobs</h2>
+                        <%}%>
+                    </div>
+                    
+                    
+                    
+                    <div class="vertical-space-20"></div>
+                    <div class="vertical-space-25"></div>
+                    <div class="job-list width-100">
+                        <ul class="pagination justify-content-end margin-auto">
+                            <li class="page-item"><a class="page-link pdding-none" href="javascript:void(0);"><i
+                                        class=" material-icons keyboard_arrow_left_right">keyboard_arrow_left</i></a>
+                            </li>
+                            <li class="page-item"><a class="page-link active" href="javascript:void(0);">1</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
+                            <li class="page-item">
+                                <a class="page-link pdding-none" href="javascript:void(0);"> <i
+                                        class=" material-icons keyboard_arrow_left_right">keyboard_arrow_right</i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="vertical-space-60"></div>
+    </section>
+
+
+    <%-include('common/footer')%>
+
+
+    <div class="modal" id="myModal">
+        <div class="container">
+            <div class="vertical-space-85"></div>
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <button class="button button-rounded  close" data-dismiss="modal">&times;</button>
+                        <video class="" controls>
+                            <source src="video/Pexels_Videos_2706.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="owlcarousel/owl.carousel.min.js"></script>
+
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>

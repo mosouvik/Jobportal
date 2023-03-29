@@ -10,29 +10,30 @@
         <div class="vertical-space-100"></div>
         <div class="vertical-space-101"></div>
         <div class="container">
-            <h2>Jobseeker Registration</h2>
+            <h2>Employer Registration</h2>
            
             <br>
             <br>
             <div class="container">
-                Already have an account ? <a href="/login"
-                    class="font-color-orange margin-left">Jobseeker Signin</a>
-<br><br>
-                    <a href="/register_emp">Employer Registration</a><span>  ||  </span><a href="/login_emp">Employer Signin</a>
- 
+                Already have an account ? <a href="/login_emp"
+                    class="font-color-orange margin-left">Employer Signin</a>
+                    <br><br>
+                    <a href="/register">Jobseeker Signup</a><span> ||  </span><a href="/login">Jobseeker Signin</a>
             </div>
-           
-            
             
             <div class="vertical-space-60"></div>
             <div class="job-post-box">
-                <form action="/registercreate" method="post" enctype="multipart/form-data">
+                <form action="/registercreate_emp" method="post" enctype="multipart/form-data">
                     <%if(error.length>0){%>
                         <div class="alert alert-danger" role="alert">
                             <%=error%>
                           </div>
                           <%}%>
-                          
+                          <%if(message.length>0){%>
+                            <div class="alert alert-success" role="alert">
+                                <%=message%>
+                              </div>
+                              <%}%>
                     <div class="form-group">
                         <label for="exampleInputJobtitle">Name</label>
                         <input type="text" class="form-control" name="name"
@@ -77,10 +78,7 @@
                                         placeholder="Enter your profile-picture" required />
                                 </div>
                             </div>
-                      
-                             
-                               
-                          
+            
                             
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">

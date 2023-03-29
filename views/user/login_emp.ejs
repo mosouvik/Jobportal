@@ -10,22 +10,20 @@
         <div class="vertical-space-100"></div>
         <div class="vertical-space-101"></div>
         <div class="container">
-            <h2>Jobseeker Login</h2>
+            <h2>Employer Login</h2>
            
             <br>
             <br>
             <div class="container">
-                Don't have an account yet? <a href="/register"
-                    class="font-color-orange margin-left">Jobseeker Signup</a>
+                Don't have an account yet?<a href="/register_emp"
+                    class="font-color-orange margin-left">Employer Signup</a>
                     <br><br>
-                    <a href="/login_emp">Employer Login</a><span>  ||  </span><a href="/register_emp">Employer Signup</a>
+                    <a href="/register">Jobseeker Signup</a><span> ||  </span><a href="/login">Jobseeker Signin</a>
             </div>
-           
-            
             
             <div class="vertical-space-60"></div>
             <div class="job-post-box">
-                <form action="/logincreate" method="post" >
+                <form action="/logincreate_emp" method="post" >
                     <%if(message.length>0){%>
                         <div class="alert alert-success" role="alert">
                             <%=message%>
