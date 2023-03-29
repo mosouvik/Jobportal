@@ -101,7 +101,7 @@ const logincreate = (req, res) => {
                 if (data.isEmployer == 'employer') {
                     req.flash('message', "Login successfully..")
 
-                    res.redirect('/postjob')
+                    res.redirect('/')
                 } else {
                     req.flash('message', "Login successfully..")
                     res.redirect('/')
