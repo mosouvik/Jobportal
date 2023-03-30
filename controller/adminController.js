@@ -2,7 +2,8 @@ const UserModel=require('../model/user');
 const PostModel=require('../model/post')
 const CategoryModel=require('../model/category');
 const AboutModel=require('../model/about')
-const EmployerModel=require('../model/employer')
+const EmployerModel=require('../model/employer');
+const ActivityModel=require('../model/activity');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 
@@ -60,6 +61,9 @@ const dashboard=(req,res)=>{
             foreignField:"emp_id",
             as:"emp_details"
         }
+    },
+    {$sort:{"createdAt":1}
+
     }
     ]).then(result=>{
         console.log(result);
@@ -246,7 +250,19 @@ const deactiveemployer=(req,res)=>{
     })
 }
 
-
+// activity..
+const activity=(req,res)=>{
+ActivityModel.find().sort('-appliedAt').then(result=>{
+    res.render('./admin/activity',{
+        title:"Admin || Activity page",
+        data:req.admin,
+        displayData:result,
+    })
+}).catch(err=>{
+    console.log(err);
+})
+    
+}
 
 
 
@@ -269,5 +285,7 @@ module.exports={
     deactivejob,
     employer,
     activeemployer,
-    deactiveemployer
+    deactiveemployer,
+    // activity
+    activity
 }

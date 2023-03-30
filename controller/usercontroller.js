@@ -244,13 +244,13 @@ const postjob = (req, res) => {
 
 const postcreate = (req, res) => {
     const image = req.file
-    const id = req.user.id
-    console.log(id);
+    const name = req.user.name
+    console.log(name);
 
     const postdata = new PostModel({
 
         jobtitle: req.body.jobtitle,
-        emp_id: id,
+        emp_name: name,
         company: req.body.company,
         location: req.body.location,
         short_des: req.body.short_des,
