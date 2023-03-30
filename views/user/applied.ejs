@@ -11,8 +11,8 @@
             <div class="carousel-background"><img src="imags/slider/slider1.jpg" alt=""></div>
             <div class="carousel-container">
                 <div class="carousel-content">
-                    <h2 class="font-color-white">Find Jobs Now more Easy Way</h2>
-                    <p class="font-color-white">You can select any job from our platform as it provides a wide variety of jobs posted by recruiters from time to time.All the Best </p>
+                    <h2 class="font-color-white">Here you can find your applied jobs</h2>
+                    <p class="font-color-white">Down below are the list of jobs you have applied  </p>
                     <a href="#" data-toggle="modal" data-target="#myModal"><i
                             class=" material-icons play">play_arrow</i></a>
                 </div>
@@ -33,6 +33,7 @@
                 
                 <div class="col-lg-8 col-md-12">
                     
+                    
                     <div class="detail width-100 ">
                         <%if(displayData.length>0){
                             for(let data of displayData){%>
@@ -41,7 +42,7 @@
                         <div class="media display-inline text-align-center">
                             <img src="<%=data.image%>" height="50px" width="50px" alt="John Doe" class="mr-3 ">
                             <div class="media-body text-left  text-align-center">
-                                <h6><a href="/viewjob/<%=data._id%>" class="font-color-black"><%=data.post_title%></a>
+                                <h6><a href="#" class="font-color-black"><%=data.post_title%></a>
                                 </h6>
                                 <i class="large material-icons">account_balance</i>
                                 <span class="text"><%=data.post_company%></span>
@@ -65,21 +66,7 @@
                     
                     <div class="vertical-space-20"></div>
                     <div class="vertical-space-25"></div>
-                    <div class="job-list width-100">
-                        <ul class="pagination justify-content-end margin-auto">
-                            <li class="page-item"><a class="page-link pdding-none" href="javascript:void(0);"><i
-                                        class=" material-icons keyboard_arrow_left_right">keyboard_arrow_left</i></a>
-                            </li>
-                            <li class="page-item"><a class="page-link active" href="javascript:void(0);">1</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-                            <li class="page-item">
-                                <a class="page-link pdding-none" href="javascript:void(0);"> <i
-                                        class=" material-icons keyboard_arrow_left_right">keyboard_arrow_right</i></a>
-                            </li>
-                        </ul>
-                    </div>
+                    
                 </div>
             </div>
         </div>
