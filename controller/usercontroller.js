@@ -30,7 +30,7 @@ const index = (req, res) => {
 }
 
 const job = (req, res) => {
-    PostModel.find().then(result => {
+    PostModel.find().sort('-createdAt').then(result => {
         res.render('./user/job', {
             title: "job list page",
             data: req.user,
