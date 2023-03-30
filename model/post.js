@@ -5,7 +5,7 @@ const postschema = new schema({
         type: String,
         required: true
     },
-    emp_id:{
+    emp_name:{
         type:String,
         required:true
     },

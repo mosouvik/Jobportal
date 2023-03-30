@@ -36,6 +36,8 @@ Route.get('/admin/activejobseeker/:id',AdminController.activejobseeker)
 Route.get('/admin/activeemployer/:id',AdminController.activeemployer)
 Route.get('/admin/deactiveemployer/:id',AdminController.deactiveemployer)
 
+// activity.
 
+Route.get('/admin/activity',AdminController.adminauth,AdminController.activity);
 
 module.exports=Route;

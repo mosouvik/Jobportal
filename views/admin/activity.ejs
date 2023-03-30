@@ -23,50 +23,38 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Activity</h1>
                        
                     </div>
 
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">JobPost DataTables </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Activity DataTables </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Job Title</th>
-                                            <th>Category</th>
-                                            <th>Posted By</th>
-                                            <th>Post date</th>
+                                            <th>Name</th>
+                                            <th>Post Title</th>
+                                            <th>Company</th>
                                             <th>Status</th>
-                                            <th>Operation</th>
+                                            <th>Applied At</th>
+                                            
                                         </tr>
                                     </thead>
                                    
                                     <tbody>
                                         <%if(displayData.length >0){
-                                            for(let data2 of displayData){
-                                                %>
+                                            for(let data2 of displayData){%>
                                         <tr>
-                                            <td><%=data2.jobtitle%></td>
-                                            <td><%=data2.category%></td>
-                                            <td><%=data2.emp_name%></td>
-                                            <td><%=data2.createdAt%></td>
-                                            <td><%=data2.status%></td>
-                                            <% if(data2.status) {%>
-                                                <td>
-                                                    <a href=" /admin/deactivejob/<%=data2._id %>" class="btn
-                                                    btn-danger">Deactive</a>
-                                            </td>
-                                            <% } else{%>
-                                                <td>
-                                                    <a href="/admin/activejob/<%= data2._id %>"
-                                                        class="btn btn-success">Active</a>
-                                                </td>
-                                                <% } %>
+                                            <td><%=data2.user_name%></td>
+                                            <td><%=data2.post_title%></td>
+                                            <td><%=data2.post_company%></td>
+                                            <td>Applied</td>
+                                            <td><%=data2.appliedAt%></td>
                                             
                                         </tr>
                                         <%}}%>
