@@ -11,7 +11,7 @@ const ActivityModel = require('../model/activity');
 
 const index = (req, res) => {
     categorymodel.find().then(result => {
-        PostModel.find().limit(5).then(result2 => {
+        PostModel.find().limit(5).sort("-createdAt").then(result2 => {
             res.render('./user/index', {
                 title: "home page",
                 message: req.flash('message'),
