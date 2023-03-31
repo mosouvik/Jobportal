@@ -27,6 +27,10 @@ const Userschema=new schema({
         type:String,
         required:true
       },
+      isVerified:{
+        type:Boolean,
+        default:false
+      },
       isAdmin:{
         type:Boolean,
         default:false
@@ -39,10 +43,7 @@ const Userschema=new schema({
         type:Date,
         default:Date.now
       },
-      email_pass:{
-        type:String,
-        required:true
-      }
+      
 })
 const UserModel=monggose.model('user',Userschema)
 module.exports=UserModel

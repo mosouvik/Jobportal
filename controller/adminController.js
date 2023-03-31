@@ -1,6 +1,7 @@
 const UserModel=require('../model/user');
 const PostModel=require('../model/post')
 const CategoryModel=require('../model/category');
+const ContactModel=require('../model/contact');
 const AboutModel=require('../model/about')
 const EmployerModel=require('../model/employer');
 const ActivityModel=require('../model/activity');
@@ -54,25 +55,12 @@ const logincreate=(req,res)=>{
 }
 
 const dashboard=(req,res)=>{
-    PostModel.aggregate([
-        {$lookup:{
-            from:"employers",
-            localField:"name",
-            foreignField:"emp_id",
-            as:"emp_details"
-        }
-    },
-    {$sort:{"createdAt":1}
-
-    }
-    ]).then(result=>{
-        console.log(result);
+  
         res.render('./admin/dashboard',{
             title:"Admin || Dashboard",
            data: req.admin,
-           displayData:result
+          
         })
-    })
     
 }
 
@@ -94,6 +82,30 @@ const logout=(req,res)=>{
    res.redirect('/admin/')
 }
 
+
+const jobpost=(req,res)=>{
+    PostModel.aggregate([
+        {$lookup:{
+            from:"employers",
+            localField:"name",
+            foreignField:"emp_id",
+            as:"emp_details"
+        }
+    },
+    {$sort:{"createdAt":1}
+
+    }
+    ]).then(result=>{
+        res.render('./admin/jobpost',{
+            title:'Admin || jobpost page',
+            data:req.admin,
+            displayData:result
+        })
+    }).catch(err=>{
+        console.log(err);
+    })
+    
+}
 
 const jobseeker=(req,res)=>{
 UserModel.find().then(result=>{
@@ -265,6 +277,20 @@ ActivityModel.find().sort('-appliedAt').then(result=>{
 }
 
 
+const contact=(req,res)=>{
+    ContactModel.find().sort('-appliedAt').then(result=>{
+        console.log(result);
+        res.render('./admin/contact',{
+            title:"Admin || Contact page",
+            data:req.admin,
+            displayData:result,
+        })
+    }).catch(err=>{
+        console.log(err);
+    })
+        
+    }
+
 
 module.exports={
     login,
@@ -272,6 +298,7 @@ module.exports={
     dashboard,
     adminauth,
     logout,
+    jobpost,
     jobseeker,
     activejobseeker,
     deactivejobseeker,
@@ -286,6 +313,7 @@ module.exports={
     employer,
     activeemployer,
     deactiveemployer,
-    // activity
-    activity
+   
+    activity,
+    contact
 }

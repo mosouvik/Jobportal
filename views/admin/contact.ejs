@@ -23,43 +23,45 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Activity</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Contact</h1>
                        
                     </div>
 
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Activity DataTables </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Contact DataTables </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Sl.No</th>
                                             <th>Name</th>
-                                            <th>Post Title</th>
-                                            <th>Company</th>
-                                            <th>Category</th>
-                                            <th>Location</th>
-                                            <th>Status</th>
-                                            <th>Applied At</th>
+                                            <th>Email</th>
+                                            <th>Phone No</th>
+                                            <th>Subject</th>
+                                            <th>Message</th>
+
+                                            <th>Contact Time</th>
+                                            
                                             
                                         </tr>
                                     </thead>
                                    
                                     <tbody>
+                                        <%let count=1%>
                                         <%if(displayData.length >0){
                                             for(let data2 of displayData){%>
                                         <tr>
-                                            <td><%=data2.user_name%></td>
-                                            <td><%=data2.post_title%></td>
-                                            <td><%=data2.post_company%></td>
-                                            <td><%=data2.category%></td>
-                                            <td><%=data2.location%></td>
-                                            <td>Applied</td>
-                                            <td><%=data2.appliedAt.toDateString()%></td>
-                                            
+                                            <td><%=count++%></td>
+                                            <td><%=data2.name%></td>
+                                            <td><%=data2.email%></td>
+                                            <td><%=data2.contact%></td>
+                                            <td><%=data2.subject%></td>
+                                            <td><%=data2.message%></td>
+                                            <td><%=data2.createdAt.toDateString()%></td>
                                         </tr>
                                         <%}}%>
                                         

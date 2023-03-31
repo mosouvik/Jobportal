@@ -17,12 +17,32 @@
                             class=" material-icons play">play_arrow</i></a>
                 </div>
             </div>
+           
         </div>
+        
     </section>
 
-
+<style>
+    #s{
+margin-left: 380px;
+    }
+</style>
    
-
+    <div id="search-box" class="margin-none">
+        <div class="container search-box">
+            <form action="/search" method="post" id="search-box_search_form_3"
+                class="search-box_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between ">
+                <div class="d-flex flex-row align-items-center justify-content-start inline-block">
+                    <span class="large material-icons search">search</span>
+                    <input id="s" name="input" class="search-box_search_input" placeholder="Search Company" required="required"
+                        type="search">
+                   
+                   
+                </div>
+                <button type="submit" class="search-box_search_button">Search Jobs</button>
+            </form>
+        </div>
+    </div>
 
     <section id="resent-job-post" class="background-color-white-drak">
         <div class="vertical-space-85"></div>

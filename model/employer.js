@@ -31,6 +31,10 @@ const Employerschema=new schema({
         type:Boolean,
         default:true
       },
+      isVerified:{
+        type:Boolean,
+        default:false
+      },
       
       status:{
         type:Boolean,
@@ -40,10 +44,7 @@ const Employerschema=new schema({
         type:Date,
         default:Date.now
       },
-      email_pass:{
-        type:String,
-        required:true
-      }
+      
 })
 const EmployerModel=monggose.model('employer',Employerschema)
 module.exports=EmployerModel

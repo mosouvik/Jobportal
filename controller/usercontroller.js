@@ -3,8 +3,11 @@ const EmployerModel = require('../model/employer')
 const PostModel = require('../model/post');
 const categorymodel = require('../model/category');
 const AboutModel = require('../model/about')
-const AcitvityModel = require('../model/activity')
+const AcitvityModel = require('../model/activity');
+const ContactModel = require('../model/contact');
+const TokenModel = require('../model/token');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer');
 const ActivityModel = require('../model/activity');
@@ -63,24 +66,93 @@ const registercreate = (req, res) => {
 
         name: req.body.name,
         email: req.body.email,
-        email_pass: req.body.emailpassword,
+
         contact: req.body.contact,
         address: req.body.address,
         password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
         image: image.path
     })
-    userdata.save().then(data => {
-        console.log(data, "Registration added successfully");
-        req.flash('message', "Registration successfull..")
-        res.redirect('/login')
-    }).catch(err => {
-        console.log(err);
-        req.flash('error', "Registration unsuccessfull..")
-        // req.flash('alert', 'alert-danger')
+    userdata.save((err, user) => {
+        if (!err) {
+            TokenModel({
+                _userid: user._id,
+                token: crypto.randomBytes(16).toString('hex')
+            }).save((err, token) => {
+                if (!err) {
+                    var transpoter = nodemailer.createTransport({
+                        host: "smtp.gmail.com",
+                        port: 587,
+                        secure: false,
+                        requireTLS: true,
+                        auth: {
+                            user: "msouvik112@gmail.com",
+                            pass: "prcvkneoulrjigxz",
+                        }
+                    });
+                    var mailOptions = {
+                        from: 'no-reply@souvik.com',
+                        to: user.email,
+                        subject: 'Acount Verification',
+                        text: 'Hello ' + req.body.name + ',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + user.email + '\/' + token.token + '\n\nThank You!\n'
+                    };
+                    transpoter.sendMail(mailOptions, function (err) {
+                        if (err) {
+                            console.log("Technical Issuu....");
+                        } else {
+                            req.flash('message', "A Verfication Email Sent To Your Mail ID.... Please Verify By Click The Link.... It Will Expire By 24 Hrs...")
+                            res.redirect('/register')
+                        }
+                    })
+                } else {
+                    console.log("Error When Create Token...", err);
+                }
+            })
+        } else {
+            console.log("Error When Create User....", err);
+        }
+    })
+    // .then(data => {
+    //     console.log(data, "Registration added successfully");
+    //     req.flash('message', "Registration successfull..")
+    //     res.redirect('/login')
+    // }).catch(err => {
+    //     console.log(err);
+    //     req.flash('error', "Registration unsuccessfull..")
+    //     // req.flash('alert', 'alert-danger')
 
-        res.redirect('/register')
+    //     res.redirect('/register')
+    // })
+}
+
+
+const userconfirmation = (req, res) => {
+    TokenModel.findOne({ token: req.params.token }, (err, token) => {
+        if (!token) {
+            console.log("Verification Link May Be Expired :(");
+            res.redirect('/register')
+        } else {
+            UserModel.findOne({ _id: token._userid, email: req.params.email }, (err, user) => {
+                if (!user) {
+                    req.flash('error', "User Not found");
+                    res.redirect('/register')
+                } else if (user.isVerified) {
+                    req.flash("error", "User Already Verified");
+                    res.redirect('/register')
+                } else {
+                    user.isVerified = true;
+                    user.save().then(result => {
+                        req.flash("message", "Your Account Verified Successfully");
+                        res.redirect('/login')
+                    }).catch(err => {
+                        console.log("Something Went Wrong...", err);
+                    })
+                }
+            })
+        }
     })
 }
+
+
 
 
 const registercreate_emp = (req, res) => {
@@ -89,24 +161,84 @@ const registercreate_emp = (req, res) => {
 
         name: req.body.name,
         email: req.body.email,
-        email_pass: req.body.emailpassword,
+
         contact: req.body.contact,
         address: req.body.address,
         password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
         image: image.path
     })
-    userdata.save().then(data => {
-        console.log(data, "Registration added successfully");
-        req.flash('message', "Registration successfull..")
-        res.redirect('/login_emp')
-    }).catch(err => {
-        console.log(err);
-        req.flash('error', "Registration unsuccessfull..")
-        // req.flash('alert', 'alert-danger')
+    userdata.save((err, user) => {
+        if (!err) {
+            TokenModel({
+                _userid: user._id,
+                token: crypto.randomBytes(16).toString('hex')
+            }).save((err, token) => {
+                if (!err) {
+                    var transpoter = nodemailer.createTransport({
+                        host: "smtp.gmail.com",
+                        port: 587,
+                        secure: false,
+                        requireTLS: true,
+                        auth: {
+                            user: "msouvik112@gmail.com",
+                            pass: "prcvkneoulrjigxz",
+                        }
+                    });
+                    var mailOptions = {
+                        from: 'no-reply@souvik.com',
+                        to: user.email,
+                        subject: 'Acount Verification',
+                        text: 'Hello ' + req.body.name + ',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/empconfirmation\/' + user.email + '\/' + token.token + '\n\nThank You!\n'
+                    };
+                    transpoter.sendMail(mailOptions, function (err) {
+                        if (err) {
+                            console.log("Technical Issuu....");
+                        } else {
+                            req.flash('message', "A Verfication Email Sent To Your Mail ID.... Please Verify By Click The Link.... It Will Expire By 24 Hrs...")
+                            res.redirect('/register_emp')
+                        }
+                    })
+                } else {
+                    console.log("Error When Create Token...", err);
+                }
+            })
+        } else {
+            console.log("Error When Create User....", err);
+        }
+    })  
+}
 
-        res.redirect('/register_emp')
+
+
+const empconfirmation = (req, res) => {
+    TokenModel.findOne({ token: req.params.token }, (err, token) => {
+        if (!token) {
+            console.log("Verification Link May Be Expired :(");
+            res.redirect('/register_emp')
+        } else {
+            EmployerModel.findOne({ _id: token._userid, email: req.params.email }, (err, user) => {
+                if (!user) {
+                    req.flash('error', "User Not found");
+                    res.redirect('/register_emp')
+                } else if (user.isVerified) {
+                    req.flash("error", "User Already Verified");
+                    res.redirect('/register_emp')
+                } else {
+                    user.isVerified = true;
+                    user.save().then(result => {
+                        req.flash("message", "Your Account Verified Successfully");
+                        res.redirect('/login_emp')
+                    }).catch(err => {
+                        console.log("Something Went Wrong...", err);
+                    })
+                }
+            })
+        }
     })
 }
+
+
+
 const login = (req, res) => {
     loginData = {}
     loginData.email = (req.cookies.email) ? req.cookies.email : undefined,
@@ -138,36 +270,47 @@ const logincreate = (req, res) => {
     }, (err, data) => {
 
         if (data) {
-            if (data.status) {
-                const haspassword = data.password
+            if (data.isVerified) {
 
-                if (bcrypt.compareSync(req.body.password, haspassword)) {
-                    const token = jwt.sign({
-                        id: data._id,
-                        name: data.name,
-                        pic: data.image
-                    }, 'souvikmondalhelowelcome@123456789', { expiresIn: '10m' })
-                    res.cookie('userToken', token)
-                    if (req.body.rememberme) {
-                        res.cookie('email', req.body.email);
-                        res.cookie('password', req.body.password)
+                if (data.status) {
+
+                    const haspassword = data.password
+
+                    if (bcrypt.compareSync(req.body.password, haspassword)) {
+                        const token = jwt.sign({
+                            id: data._id,
+                            name: data.name,
+                            pic: data.image
+                        }, 'souvikmondalhelowelcome@123456789', { expiresIn: '10m' })
+                        res.cookie('userToken', token)
+                        if (req.body.rememberme) {
+                            res.cookie('email', req.body.email);
+                            res.cookie('password', req.body.password)
+                        }
+                        console.log(data, "login successfully");
+
+
+                        req.flash('message', "Login successfully..")
+
+                        res.redirect('/')
+                    } else {
+                        console.log("password incorect");
+                        req.flash('error', "Password Incorrect")
+                        res.redirect('/login')
                     }
-                    console.log(data, "login successfully");
 
 
-                    req.flash('message', "Login successfully..")
 
-                    res.redirect('/')
                 } else {
-                    console.log("password incorect");
-                    req.flash('error', "Password Incorrect")
+                    req.flash('error', 'Admin has blocked your account')
                     res.redirect('/login')
                 }
-
             } else {
-                req.flash('error', 'Admin has blocked your account')
+                req.flash('error', 'Verify your account first');
                 res.redirect('/login')
             }
+
+
         } else {
             console.log("invalid email hi");
             req.flash('error', "No User found with thet email")
@@ -182,38 +325,44 @@ const logincreate_emp = (req, res) => {
     }, (err, data) => {
 
         if (data) {
-            if (data.status) {
-                const haspassword = data.password
-
-                if (bcrypt.compareSync(req.body.password, haspassword)) {
-                    const token = jwt.sign({
-                        id: data._id,
-                        name: data.name,
-                        isEmployer: true,
-                        pic: data.image
-                    }, 'souvikmondalhelowelcome@123456789', { expiresIn: '10m' })
-                    res.cookie('userToken', token)
-                    if (req.body.rememberme) {
-                        res.cookie('email', req.body.email);
-                        res.cookie('password', req.body.password)
+            if (data.isVerified) {
+                if (data.status) {
+                    const haspassword = data.password
+    
+                    if (bcrypt.compareSync(req.body.password, haspassword)) {
+                        const token = jwt.sign({
+                            id: data._id,
+                            name: data.name,
+                            isEmployer: true,
+                            pic: data.image
+                        }, 'souvikmondalhelowelcome@123456789', { expiresIn: '10m' })
+                        res.cookie('userToken', token)
+                        if (req.body.rememberme) {
+                            res.cookie('email', req.body.email);
+                            res.cookie('password', req.body.password)
+                        }
+                        console.log(data, "login successfully");
+    
+    
+                        req.flash('message', "Login successfully..")
+    
+                        res.redirect('/postjob')
+    
+    
+                    } else {
+                        console.log("password incorect");
+                        req.flash('error', "Password Incorrect")
+                        res.redirect('/login_emp')
                     }
-                    console.log(data, "login successfully");
-
-
-                    req.flash('message', "Login successfully..")
-
-                    res.redirect('/postjob')
-
-
                 } else {
-                    console.log("password incorect");
-                    req.flash('error', "Password Incorrect")
+                    req.flash('error', 'Admin has blocked your account')
                     res.redirect('/login_emp')
                 }
-            } else {
-                req.flash('error', 'Admin has blocked your account')
+            }else{
+                req.flash('error','Verify account first')
                 res.redirect('/login_emp')
             }
+            
 
 
         } else {
@@ -278,7 +427,9 @@ const contact = (req, res) => {
     res.render('./user/contact', {
         title: "contact page",
         data: req.user,
-        message: req.flash('message')
+        message: req.flash('message'),
+        error: req.flash('error')
+
     })
 }
 
@@ -329,49 +480,24 @@ const catc = (req, res) => {
     })
 }
 
-// Send Email
-
-const sendemail = (req, res) => {
-    UserModel.findOne({
-        email: req.body.email,
-    }).then((user) => {
-        if (user) {
-            const email = user.email
-            const password = user.email_pass
-
-            var transporter = nodemailer.createTransport({
-                host: "smtp.gmail.com",
-                port: 587,
-                secure: false,
-                requireTLS: true,
-                auth: {
-                    user: `${email}`,
-                    pass: `${password}`
-                }
-            });
-            var mailOptions = {
-                from: req.body.name,
-                to: "msouvik112@gmail.com",
-                subject: req.body.subject,
-                text: req.body.name + ' here' + '\n' + req.body.message
-            };
-            transporter.sendMail(mailOptions, function (err) {
-                if (err) {
-                    console.log("Techniclal Issue...");
-                    console.log(err);
-                } else {
-                    req.flash("message", "Mail has been sent");
-                    res.redirect("/contact");
-                }
-            });
-
-
-
-        } else {
-            console.log("Error When Create User...", err);
-        }
+const contactcreate=(req,res)=>{
+    const cdata=new ContactModel({
+        name:req.body.name,
+        email:req.body.email,
+        subject:req.body.subject,
+        contact:req.body.contact,
+        message:req.body.message
+    })
+    cdata.save().then(result=>{
+        req.flash('message',"Contact added successfull");
+        res.redirect('/contact')
+    }).catch(err=>{
+        req.flash('error',"Contact data not added.");
+        res.redirect('/contact')
     })
 }
+
+
 
 //,.,..Category
 
@@ -583,11 +709,30 @@ const appliedjobs = (req, res) => {
     }
 }
 
+
+// search..
+const search=(req,res)=>{
+    PostModel.aggregate([
+        {$match:{company:req.body.input}}
+    ]).then(result=>{
+        console.log(result);
+        res.render('./user/job',{
+            title:"joblist page",
+            data:req.user,
+            displayData:result
+            
+        })
+    })
+}
+
+
+
 module.exports = {
     index,
     job,
     register,
     registercreate,
+    userconfirmation,
     postjob,
     postcreate,
     login,
@@ -598,8 +743,9 @@ module.exports = {
     logout,
     cat,
     catc,
-    sendemail,
+    contactcreate,
     register_emp,
+    empconfirmation,
     logincreate_emp,
     registercreate_emp,
     login_emp,
@@ -616,5 +762,6 @@ module.exports = {
     Freelancer,
     view_job,
     apply,
-    appliedjobs
+    appliedjobs,
+    search
 }

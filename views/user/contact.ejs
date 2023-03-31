@@ -16,15 +16,21 @@
             <div class="Get-in-Touch-box">
                 <h3 class="text-left">Get in Touch</h3>
                 <div class="vertical-space-5"></div>
-                <p class="text-left">Want to contact admin send an email
+                <p class="text-left">Want to contact admin 
                 </p>
-                <%if(message.length>0){%>
-                    <div class="alert alert-success" role="alert">
-                        <%=message%>
+                <%if(error.length>0){%>
+                    <div class="alert alert-danger" role="alert">
+                        <%=error%>
                       </div>
                       <%}%>
+                      
+                      <%if(message.length>0){%>
+                        <div class="alert alert-success" role="alert">
+                            <%=message%>
+                          </div>
+                          <%}%>
                 <div class="vertical-space-40"></div>
-                <form action="/sendemail" method="post">
+                <form action="/contactcreate" method="post">
                     <div class="row">
                         <div class=" col-lg-6 col-md-12">
                             <div class="form-group">
@@ -56,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="Send">Send</button>
+                    <button type="submit" class="Send">Submit</button>
                     <button type="reset" class="button button-rounded  close">&times;</button>
                 </form>
             </div>

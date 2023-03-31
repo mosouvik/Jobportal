@@ -8,6 +8,9 @@ Route.get('/',UserController.index);
 Route.get('/job',UserController.job)
 Route.get('/register',UserController.register);
 Route.post('/registercreate',[CheckDuplcate.CheckDuplicate],UserController.registercreate);
+Route.get('/confirmation/:email/:token',UserController.userconfirmation)
+Route.get('/empconfirmation/:email/:token',UserController.empconfirmation)
+
 Route.post('/registercreate_emp',[CheckDuplcate2.CheckDuplicate2],UserController.registercreate_emp);
 Route.get('/login',UserController.login);
 Route.get('/login_emp',UserController.login_emp);
@@ -27,8 +30,7 @@ Route.post('/catc',UserController.catc)
 
 
 // Contact
-Route.post('/sendemail',UserController.auth,UserController.sendemail)
-
+Route.post('/contactcreate',UserController.auth,UserController.contactcreate);
 //...category
 
 Route.get('/Education-Training',UserController.Education_Training)
@@ -49,5 +51,10 @@ Route.get('/apply/:id',UserController.auth,UserController.apply)
 
 //...applied jobs
 Route.get('/appliedjobs',UserController.auth,UserController.appliedjobs)
+
+
+
+// search..
+Route.post('/search',UserController.search)
 
 module.exports=Route

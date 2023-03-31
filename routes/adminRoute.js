@@ -8,6 +8,7 @@ Route.get('/admin/dashboard',AdminController.adminauth,AdminController.dashboard
 Route.get('/admin/jobcategory',AdminController.adminauth,AdminController.jobcategory);
 Route.get('/admin/jobseeker',AdminController.adminauth,AdminController.jobseeker)
 Route.get('/admin/employer',AdminController.adminauth,AdminController.employer)
+Route.get('/admin/jobpost',AdminController.jobpost);
 
 Route.get('/admin/logout',AdminController.logout)
 
@@ -39,5 +40,10 @@ Route.get('/admin/deactiveemployer/:id',AdminController.deactiveemployer)
 // activity.
 
 Route.get('/admin/activity',AdminController.adminauth,AdminController.activity);
+
+
+// contact.
+Route.get('/admin/contact',AdminController.adminauth,AdminController.contact);
+
 
 module.exports=Route;
