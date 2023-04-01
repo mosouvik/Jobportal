@@ -14,11 +14,11 @@ const nodemailer = require('nodemailer');
 const ActivityModel = require('../model/activity');
 
 const index = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result3 => {
+    
+       
             categorymodel.find().then(result => {
                 PostModel.find().limit(5).sort("-createdAt").then(result2 => {
-                    console.log(result3);
+                    
                     res.render('./user/index', {
                         title: "home page",
                         message: req.flash('message'),
@@ -26,7 +26,7 @@ const index = (req, res) => {
                         displayData: result,
                         data: req.user,
                         displayData2: result2,
-                        emp_data: result3
+                        
                     })
                 }).catch(err => {
                     console.log(err);
@@ -34,53 +34,25 @@ const index = (req, res) => {
             }).catch(err => {
                 console.log(err);
             })
-        })
+        
 
-    } else {
-        categorymodel.find().then(result => {
-            PostModel.find().limit(5).sort("-createdAt").then(result2 => {
-                res.render('./user/index', {
-                    title: "home page",
-                    message: req.flash('message'),
-                    error: req.flash('error'),
-                    displayData: result,
-                    data: req.user,
-                    displayData2: result2,
-                    emp_data: ""
-
-                })
-            }).catch(err => {
-                console.log(err);
-            })
-        }).catch(err => {
-            console.log(err);
-        })
-    }
+    
 }
 
 const job = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result3 => {
+   
+        
             PostModel.find().sort('-createdAt').then(result => {
                 res.render('./user/job', {
                     title: "job list page",
                     data: req.user,
                     displayData: result,
-                    emp_data: result3
+                    
                 })
             })
 
-        })
-    } else {
-        PostModel.find().sort('-createdAt').then(result => {
-            res.render('./user/job', {
-                title: "job list page",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+       
+   
 }
 
 const register = (req, res) => {
@@ -467,35 +439,26 @@ const postcreate = (req, res) => {
 }
 
 const contact = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result3 => {
+    
+        
             res.render('./user/contact', {
                 title: "contact page",
                 data: req.user,
                 message: req.flash('message'),
                 error: req.flash('error'),
-                emp_data: result3
+                
 
             })
-        })
-    } else {
-        res.render('./user/contact', {
-            title: "contact page",
-            data: req.user,
-            message: req.flash('message'),
-            error: req.flash('error'),
-            emp_data: ""
-
-        })
-    }
+        
+   
 
 }
 
 
 
 const about = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result3 => {
+    
+        
             AboutModel.find().then(result => {
                 Teammodel.find().then(result2 => {
 
@@ -503,28 +466,15 @@ const about = (req, res) => {
                         title: "About page",
                         data: req.user,
                         displayData: result,
-                        emp_data: result3,
+                        
                         team: result2,
                     })
                 })
 
             })
 
-        })
-    } else {
-        AboutModel.find().then(result => {
-            Teammodel.find().then(result2 => {
-                res.render('./user/about', {
-                    title: "About page",
-                    data: req.user,
-                    displayData: result,
-                    team: result2,
-                    emp_data: ""
-                })
-            })
-
-        })
-    }
+       
+    
 
 }
 

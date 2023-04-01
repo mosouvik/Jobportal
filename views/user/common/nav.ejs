@@ -43,7 +43,7 @@
                                 <ul class="main_nav">
                                     <li><a href="/">Home</a></li>
                                    <li><a href="/job">Job</a></li>
-                                   <%if(!emp_data){%>
+                                   <%if(!data.isEmployer){%>
                                     <li><a href="/appliedjobs">Applied Jobs</a></li>
                                     <%}%>
                                         
@@ -52,7 +52,7 @@
                                     <li><a href="/contact">Contact</a></li>
              
                                 </ul>
-                                <%if(emp_data){%>
+                                <%if(data.isEmployer){%>
                                 <div class=" Post-Jobs">
                                     <a href="/postjob" class="">
                                         Post Jobs
