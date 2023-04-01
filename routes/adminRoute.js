@@ -46,4 +46,10 @@ Route.get('/admin/activity',AdminController.adminauth,AdminController.activity);
 Route.get('/admin/contact',AdminController.adminauth,AdminController.contact);
 
 
+Route.get('/admin/team',AdminController.adminauth,AdminController.team);
+
+Route.get('/admin/activeteam/:id',AdminController.activeteam);
+Route.get('/admin/deactiveteam/:id',AdminController.deactiveteam);
+
+
 module.exports=Route;

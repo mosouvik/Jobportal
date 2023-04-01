@@ -6,6 +6,7 @@ const AboutModel = require('../model/about')
 const AcitvityModel = require('../model/activity');
 const ContactModel = require('../model/contact');
 const TokenModel = require('../model/token');
+const Teammodel=require('../model/team');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
@@ -129,8 +130,8 @@ const registercreate = (req, res) => {
                         secure: false,
                         requireTLS: true,
                         auth: {
-                            user: "....",
-                            pass: "....",
+                            user: "dassouvik9991@gmail.com",
+                            pass: "xvyosdscrianoksg",
                         }
                     });
                     var mailOptions = {
@@ -216,8 +217,8 @@ const registercreate_emp = (req, res) => {
                         secure: false,
                         requireTLS: true,
                         auth: {
-                            user: "msouvik112@gmail.com",
-                            pass: "prcvkneoulrjigxz",
+                            user: "dassouvik9991@gmail.com",
+                            pass: "xvyosdscrianoksg",
                         }
                     });
                     var mailOptions = {
@@ -494,23 +495,31 @@ const about = (req, res) => {
     if(req.user){
         EmployerModel.findById(req.user.id).then(result3=>{
             AboutModel.find().then(result => {
-                res.render('./user/about', {
-                    title: "About page",
-                    data: req.user,
-                    displayData: result,
-                    emp_data:result3
+                Teammodel.find().then(result2=>{
+                    
+                    res.render('./user/about', {
+                        title: "About page",
+                        data: req.user,
+                        displayData: result,
+                        emp_data:result3,
+                        team:result2,
+                    })
                 })
+                
             })
         
         })
     }else{
         AboutModel.find().then(result => {
-            res.render('./user/about', {
-                title: "About page",
-                data: req.user,
-                displayData: result,
-                
+            Teammodel.find().then(result2=>{
+                res.render('./user/about', {
+                    title: "About page",
+                    data: req.user,
+                    displayData: result,
+                    team:result2
+                })
             })
+            
         })
     }
     
@@ -834,7 +843,29 @@ const profile=(req,res)=>{
 
 
 
+
+// test
+
+const team=(req,res)=>{
+    res.render('./user/team')
+}
+
+const ct=(req,res)=>{
+    const image=req.file
+    Teammodel({
+        name:req.body.name,
+        image:image.path,
+        message:req.body.message,
+    }).save().then(result=>{
+        console.log(result);
+        res.redirect('/team')
+    })
+
+}
+
 module.exports = {
+    team,
+    ct,
     index,
     job,
     register,

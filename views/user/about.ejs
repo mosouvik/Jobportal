@@ -93,94 +93,20 @@
             </p>
             <div class="vertical-space-60"></div>
             <div class="row">
+                <%if(team.length > 0){
+                    for(let data of team){ if(data.status){%>
                 <div class="col-lg-3 col-md-6">
                     <div class="Meet-With-Our-Team-box">
                         <div class="media">
-                            <img src="/upload/ankur.jpeg" alt="" class="mr-3 rounded">
+                            <img src="/<%=data.image%>" alt="img" class="mr-3 rounded">
                             <div class="media-body align-self-center">
-                                <h6>Ankur Biswas</h6>
-                                <p>Creator of this website</p>
+                                <h6><%=data.name%></h6>
+                                <p><%=data.message%></p>
                             </div>
                         </div>
                     </div>
                 </div>       
-                <div class="col-lg-3 col-md-6">
-                    <div class="Meet-With-Our-Team-box">
-                        <div class="media">
-                            <img src="/upload/souvik_mondal.jpeg" alt="" class="mr-3 rounded">
-                            <div class="media-body align-self-center">
-                                <h6>Souvik Mondal</h6>
-                                <p>Creator of this website</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="Meet-With-Our-Team-box">
-                        <div class="media">
-                            <img src="/upload/arka2.jpg" alt="" class="mr-3 rounded">
-                            <div class="media-body align-self-center">
-                                <h6>Arka Mondal</h6>
-                                <p>Creator of this website</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="Meet-With-Our-Team-box">
-                        <div class="media">
-                            <img src="/upload/souvik_das.jpeg" alt="" class="mr-3 rounded">
-                            <div class="media-body align-self-center">
-                                <h6>Souvik Das</h6>
-                                <p>Creator of this website</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="Meet-With-Our-Team-box">
-                        <div class="media">
-                            <img src="/upload/subhajit.jpg" alt="" class="mr-3 rounded">
-                            <div class="media-body align-self-center">
-                                <h6>Subhajit </h6>
-                                <p>Part of the team</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>       
-                <div class="col-lg-3 col-md-6">
-                    <div class="Meet-With-Our-Team-box">
-                        <div class="media">
-                            <img src="/upload/nishant2.jpg" alt="" class="mr-3 rounded">
-                            <div class="media-body align-self-center">
-                                <h6>Nishant Kumar Mahto</h6>
-                                <p>Part of the team</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="Meet-With-Our-Team-box">
-                        <div class="media">
-                            <img src="/upload/nabbendu.jpg" alt="" class="mr-3 rounded">
-                            <div class="media-body align-self-center">
-                                <h6>Nabbendu Bag</h6>
-                                <p>Part of the team</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="Meet-With-Our-Team-box">
-                        <div class="media">
-                            <img src="/upload/amit.jpg" alt="" class="mr-3 rounded">
-                            <div class="media-body align-self-center">
-                                <h6>Amit Kumar Chakraborty</h6>
-                                <p>Part of the team</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               <%}}}%>
             </div>
             <div class="vertical-space-85"></div>
         </div>

@@ -5,6 +5,7 @@ const ContactModel=require('../model/contact');
 const AboutModel=require('../model/about')
 const EmployerModel=require('../model/employer');
 const ActivityModel=require('../model/activity');
+const TeamModel=require('../model/team');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 
@@ -269,7 +270,7 @@ const employer=(req,res)=>{
 const activeemployer=(req,res)=>{
     const id=req.params.id
     EmployerModel.findByIdAndUpdate(id,{status:true}).then(result=>{
-        console.log(result,"Deactived employer");
+        console.log(result,"actived employer");
         res.redirect('/admin/employer')
     }).catch(err=>{
         console.log(err);
@@ -316,7 +317,44 @@ const contact=(req,res)=>{
     }
 
 
+    const team=(req,res)=>{
+        TeamModel.find().then(result=>{
+            res.render('./admin/team',{
+                title:"Admin || Team page",
+                data:req.admin,
+                displayData:result
+            })
+        }).catch(err=>{
+            console.log(err);
+        })
+       
+    }
+
+    const activeteam=(req,res)=>{
+        const id=req.params.id
+        TeamModel.findByIdAndUpdate(id,{status:true}).then(result=>{
+            console.log(result,"actived team");
+            res.redirect('/admin/team')
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+
+    const deactiveteam=(req,res)=>{
+        const id=req.params.id
+        TeamModel.findByIdAndUpdate(id,{status:false}).then(result=>{
+            console.log(result,"deactived team");
+            res.redirect('/admin/team')
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+
+
 module.exports={
+    team,
+    activeteam,
+    deactiveteam,
     login,
     logincreate,
     dashboard,

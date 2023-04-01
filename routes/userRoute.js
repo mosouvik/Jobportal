@@ -60,4 +60,14 @@ Route.post('/search',UserController.search)
 //...profile
 Route.get('/profile',UserController.profile)
 
+
+
+
+
+// test
+
+Route.get('/team',UserController.team);
+Route.post('/ct',UserController.ct);
+
+
 module.exports=Route
