@@ -534,8 +534,8 @@ const contactcreate = (req, res) => {
 //,.,..Category
 
 const Education_Training = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result2 => {
+    
+        
             console.log(result2);
             PostModel.aggregate([{
                 $match: { "category": "Education-Training" }
@@ -544,27 +544,15 @@ const Education_Training = (req, res) => {
                     title: "Education-Training",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
             })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "category": "Education-Training" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Education-Training",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-
-            })
-        })
-    }
+        
+   
 }
 const Medical_Pharma = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result2 => {
+    
+        
             PostModel.aggregate([{
                 $match: { "category": "Medical-Pharma" }
             }]).then(result => {
@@ -572,28 +560,17 @@ const Medical_Pharma = (req, res) => {
                     title: "Medical-Pharma",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
             })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "category": "Medical-Pharma" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Medical-Pharma",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+        
+    
 
 }
 
 const Computer_Programing = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result2 => {
+   
+        
             PostModel.aggregate([{
                 $match: { "category": "Computer-Programing" }
             }]).then(result => {
@@ -601,26 +578,15 @@ const Computer_Programing = (req, res) => {
                     title: "Computer-Programing",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
             })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "category": "Computer-Programing" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Computer-Programing",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+        
+   
 }
 
 const Customer_Support = (req, res) => {
-    if (req.user.isEmployer) {
+    
         EmployerModel.findById(req.user.id).then(result2 => {
             PostModel.aggregate([{
                 $match: { "category": "Customer-Support" }
@@ -629,27 +595,17 @@ const Customer_Support = (req, res) => {
                     title: "Customer-Support",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
             })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "category": "Customer-Support" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Customer-Support",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+       
+   
+})
 }
 
 const Design_Multimedia = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result2 => {
+   
+        
             PostModel.aggregate([{
                 $match: { "category": "Design-Multimedia" }
             }]).then(result => {
@@ -657,26 +613,14 @@ const Design_Multimedia = (req, res) => {
                     title: "Design-Multimedia",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
-            })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "category": "Design-Multimedia" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Design-Multimedia",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+            })     
+    
 }
 const Web_Development = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result2 => {
+   
+        
             PostModel.aggregate([{
                 $match: { "category": "Web-Development" }
             }]).then(result => {
@@ -684,26 +628,15 @@ const Web_Development = (req, res) => {
                     title: "Web-Development",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
             })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "category": "Web-Development" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Web-Development",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+       
+   
 }
 const Engineer_Architects = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result2 => {
+    
+        
             PostModel.aggregate([{
                 $match: { "category": "Engineer-Architects" }
             }]).then(result => {
@@ -711,26 +644,15 @@ const Engineer_Architects = (req, res) => {
                     title: "Engineer-Architects",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
             })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "category": "Engineer-Architects" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Engineer-Architects",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+       
+   
 }
 const Sales_Marketing = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result2 => {
+   
+        
             PostModel.aggregate([{
                 $match: { "category": "Sales-Marketing" }
             }]).then(result => {
@@ -738,27 +660,16 @@ const Sales_Marketing = (req, res) => {
                     title: "Sales-Marketing",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
             })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "category": "Sales-Marketing" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Sales-Marketing",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+        
+   
 }
 
 const Full_Time = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result2 => {
+    
+        
             PostModel.aggregate([{
                 $match: { "job_nature": "Full-Time" }
             }]).then(result => {
@@ -766,25 +677,14 @@ const Full_Time = (req, res) => {
                     title: "Full-Time",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
             })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "job_nature": "Full-Time" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Full-Time",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+        
+
 }
 const Part_Time = (req, res) => {
-    if (req.user.isEmployer) {
+    
         EmployerModel.findById(req.user.id).then(result2 => {
             PostModel.aggregate([{
                 $match: { "job_nature": "Part-Time" }
@@ -793,26 +693,16 @@ const Part_Time = (req, res) => {
                     title: "Part-Time",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
             })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "job_nature": "Part-Time" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Part-Time",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+        
+   
+})
 }
 const Freelancer = (req, res) => {
-    if (req.user.isEmployer) {
-        EmployerModel.findById(req.user.id).then(result2 => {
+    
+        
             PostModel.aggregate([{
                 $match: { "job_nature": "Freelancer" }
             }]).then(result => {
@@ -820,22 +710,10 @@ const Freelancer = (req, res) => {
                     title: "Freelancer",
                     data: req.user,
                     displayData: result,
-                    emp_data: result2
+                    
                 })
             })
-        })
-    } else {
-        PostModel.aggregate([{
-            $match: { "job_nature": "Freelancer" }
-        }]).then(result => {
-            res.render('./user/job', {
-                title: "Freelancer",
-                data: req.user,
-                displayData: result,
-                emp_data: ""
-            })
-        })
-    }
+        
 }
 
 const view_job = (req, res) => {
