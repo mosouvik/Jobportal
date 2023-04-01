@@ -21,17 +21,11 @@
                                 <li><a href="/">Home</a></li>
                                <li><a href="/job">Job</a></li>
                                
-                                <li><a href="/appliedjobs">Applied Jobs</a></li>
-
                                 <li><a href="/about">About</a></li>
                                 <li><a href="/contact">Contact</a></li>
 
                             </ul>
-                            <div class=" Post-Jobs">
-                                <a href="/postjob" class="">
-                                    Post Jobs
-                                </a>
-                            </div>
+                            
                            <ul class="main_nav">
                             <li></li>
                             
@@ -48,19 +42,25 @@
                                 <ul class="main_nav">
                                     <li><a href="/">Home</a></li>
                                    <li><a href="/job">Job</a></li>
+                                   <%if(!emp_data){%>
                                     <li><a href="/appliedjobs">Applied Jobs</a></li>
+                                    <%}%>
                                     <li><a href="/about">About</a></li>
                                     <li><a href="/contact">Contact</a></li>
              
                                 </ul>
+                                <%if(emp_data){%>
                                 <div class=" Post-Jobs">
                                     <a href="/postjob" class="">
                                         Post Jobs
                                     </a>
+                                
                                 </div>
+                                <%}%>
                                
                                <ul class="main_nav">
-                                <li><a href="#">Profile</a></li>
+                                <li></li>
+                                <li><a href="/profile">Profile</a></li>
                                 <li></li>
                                 
                                </ul>

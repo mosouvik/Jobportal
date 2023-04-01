@@ -57,4 +57,7 @@ Route.get('/appliedjobs',UserController.auth,UserController.appliedjobs)
 // search..
 Route.post('/search',UserController.search)
 
+//...profile
+Route.get('/profile',UserController.profile)
+
 module.exports=Route

@@ -13,51 +13,93 @@ const nodemailer = require('nodemailer');
 const ActivityModel = require('../model/activity');
 
 const index = (req, res) => {
-    categorymodel.find().then(result => {
-        PostModel.find().limit(5).sort("-createdAt").then(result2 => {
-            res.render('./user/index', {
-                title: "home page",
-                message: req.flash('message'),
-                error: req.flash('error'),
-                displayData: result,
-                data: req.user,
-                displayData2: result2
+    if(req.user){
+    EmployerModel.findById(req.user.id).then(result3=>{
+        categorymodel.find().then(result => {
+            PostModel.find().limit(5).sort("-createdAt").then(result2 => {
+                res.render('./user/index', {
+                    title: "home page",
+                    message: req.flash('message'),
+                    error: req.flash('error'),
+                    displayData: result,
+                    data: req.user,
+                    displayData2: result2,
+                    emp_data:result3
+                })
+            }).catch(err => {
+                console.log(err);
             })
         }).catch(err => {
             console.log(err);
         })
-    }).catch(err => {
-        console.log(err);
     })
-
+    
+    }else{
+        categorymodel.find().then(result => {
+            PostModel.find().limit(5).sort("-createdAt").then(result2 => {
+                res.render('./user/index', {
+                    title: "home page",
+                    message: req.flash('message'),
+                    error: req.flash('error'),
+                    displayData: result,
+                    data: req.user,
+                    displayData2: result2,
+                    
+                })
+            }).catch(err => {
+                console.log(err);
+            })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 }
 
 const job = (req, res) => {
+    if(req.user){
+    EmployerModel.findById(req.user.id).then(result3=>{
     PostModel.find().sort('-createdAt').then(result => {
         res.render('./user/job', {
             title: "job list page",
             data: req.user,
-            displayData: result
+            displayData: result,
+            emp_data:result3
         })
     })
 
+})
+    }else{
+        PostModel.find().sort('-createdAt').then(result => {
+            res.render('./user/job', {
+                title: "job list page",
+                data: req.user,
+                displayData: result,
+                
+            })
+        })
+    }
 }
 
 const register = (req, res) => {
+    
     res.render('./user/register', {
         title: " register page",
         message: req.flash('message'),
         error: req.flash('error'),
-        data: req.user
+        data: req.user,
+       
     })
 }
 const register_emp = (req, res) => {
+    
     res.render('./user/register_emp', {
         title: " register page",
         message: req.flash('message'),
         error: req.flash('error'),
-        data: req.user
+        data: req.user,
+        
     })
+
 }
 
 const registercreate = (req, res) => {
@@ -66,7 +108,9 @@ const registercreate = (req, res) => {
 
         name: req.body.name,
         email: req.body.email,
-
+        skills:req.body.skills,
+        experience:req.body.experience,
+        yourself:req.body.yourself,
         contact: req.body.contact,
         address: req.body.address,
         password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
@@ -111,17 +155,7 @@ const registercreate = (req, res) => {
             console.log("Error When Create User....", err);
         }
     })
-    // .then(data => {
-    //     console.log(data, "Registration added successfully");
-    //     req.flash('message', "Registration successfull..")
-    //     res.redirect('/login')
-    // }).catch(err => {
-    //     console.log(err);
-    //     req.flash('error', "Registration unsuccessfull..")
-    //     // req.flash('alert', 'alert-danger')
-
-    //     res.redirect('/register')
-    // })
+   
 }
 
 
@@ -161,6 +195,8 @@ const registercreate_emp = (req, res) => {
 
         name: req.body.name,
         email: req.body.email,
+        yourself:req.body.yourself,
+        company:req.body.company,
 
         contact: req.body.contact,
         address: req.body.address,
@@ -240,6 +276,7 @@ const empconfirmation = (req, res) => {
 
 
 const login = (req, res) => {
+    
     loginData = {}
     loginData.email = (req.cookies.email) ? req.cookies.email : undefined,
         loginData.password = (req.cookies.password) ? req.cookies.password : undefined,
@@ -375,13 +412,15 @@ const logincreate_emp = (req, res) => {
 
 
 const postjob = (req, res) => {
+    EmployerModel.findById(req.user.id).then(result3=>{
     const emp_status = req.user.isEmployer
     if (emp_status) {
         res.render('./user/postjob', {
             title: "Post job page",
             message: req.flash('message'),
             error: req.flash('error'),
-            data: req.user
+            data: req.user,
+            emp_data:result3
         })
     } else {
         req.flash('error', "You are not Employer...")
@@ -389,6 +428,7 @@ const postjob = (req, res) => {
         res.redirect('/')
     }
 
+})
 }
 
 const postcreate = (req, res) => {
@@ -424,26 +464,56 @@ const postcreate = (req, res) => {
 }
 
 const contact = (req, res) => {
-    res.render('./user/contact', {
-        title: "contact page",
-        data: req.user,
-        message: req.flash('message'),
-        error: req.flash('error')
-
-    })
+    if(req.user){
+        EmployerModel.findById(req.user.id).then(result3=>{
+            res.render('./user/contact', {
+                title: "contact page",
+                data: req.user,
+                message: req.flash('message'),
+                error: req.flash('error'),
+                emp_data:result3
+        
+            })
+        })
+    }else{
+        res.render('./user/contact', {
+            title: "contact page",
+            data: req.user,
+            message: req.flash('message'),
+            error: req.flash('error'),
+            
+    
+        })
+    }
+    
 }
 
 
 
 const about = (req, res) => {
-    AboutModel.find().then(result => {
-        res.render('./user/about', {
-            title: "About page",
-            data: req.user,
-            displayData: result
+    if(req.user){
+        EmployerModel.findById(req.user.id).then(result3=>{
+            AboutModel.find().then(result => {
+                res.render('./user/about', {
+                    title: "About page",
+                    data: req.user,
+                    displayData: result,
+                    emp_data:result3
+                })
+            })
+        
         })
-    })
-
+    }else{
+        AboutModel.find().then(result => {
+            res.render('./user/about', {
+                title: "About page",
+                data: req.user,
+                displayData: result,
+                
+            })
+        })
+    }
+    
 }
 
 const auth = (req, res, next) => {
@@ -628,6 +698,7 @@ const Freelancer = (req, res) => {
 }
 
 const view_job = (req, res) => {
+    EmployerModel.findById(req.user.id).then(result3=>{
     const id = req.params.id
     const u_id = req.user.id
     PostModel.findById(id).then(result => {
@@ -647,13 +718,15 @@ const view_job = (req, res) => {
                 displayData: result,
                 displayData2: result2,
                 message: req.flash('message'),
-                error: req.flash('error')
+                error: req.flash('error'),
+                emp_data:result3
             })
 
         })
 
     })
 
+})
 }
 
 const apply = (req, res) => {
@@ -691,6 +764,7 @@ const apply = (req, res) => {
 
 
 const appliedjobs = (req, res) => {
+    EmployerModel.findById(req.user.id).then(result3=>{
     if (!req.user.isEmployer) {
         const id = req.user.id
         ActivityModel.aggregate([
@@ -700,29 +774,62 @@ const appliedjobs = (req, res) => {
             res.render('./user/applied', {
                 title: "Applied Jobs",
                 data: req.user,
-                displayData: result
+                displayData: result,
+                emp_data:result3
             })
         })
     } else {
         req.flash('error', "Employer cannot have applied jobs")
         res.redirect('/')
     }
+})
 }
 
 
 // search..
 const search=(req,res)=>{
-    PostModel.aggregate([
-        {$match:{company:req.body.input}}
-    ]).then(result=>{
-        console.log(result);
-        res.render('./user/job',{
-            title:"joblist page",
+    if(req.user){
+        EmployerModel.findById(req.user.id).then(result3=>{
+            PostModel.aggregate([
+                {$match:{company:req.body.input}}
+            ]).then(result=>{
+                console.log(result);
+                res.render('./user/job',{
+                    title:"joblist page",
+                    data:req.user,
+                    displayData:result,
+                    emp_data:result3
+                    
+                })
+            })
+        })
+    }else{
+        PostModel.aggregate([
+            {$match:{company:req.body.input}}
+        ]).then(result=>{
+            console.log(result);
+            res.render('./user/job',{
+                title:"joblist page",
+                data:req.user,
+                displayData:result,
+                
+                
+            })
+        })
+    }
+    
+}
+const profile=(req,res)=>{
+    UserModel.findById(req.user.id).then(result3=>{
+        EmployerModel.findById(req.user.id).then(result2=>{
+        res.render('./user/profile',{
+            title:"Profile",
             data:req.user,
-            displayData:result
-            
+            user_data:result3,
+            emp_data:result2
         })
     })
+})
 }
 
 
@@ -763,5 +870,6 @@ module.exports = {
     view_job,
     apply,
     appliedjobs,
-    search
+    search,
+    profile
 }

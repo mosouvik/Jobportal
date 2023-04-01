@@ -1,0 +1,184 @@
+<%-include('common/head')%>
+
+    <body>
+
+        <%-include('common/nav')%>
+
+<br><br><br><br><br><br><br>
+
+
+
+            <section class="bg-light">
+                <div class="container">
+                    <%if(user_data){%>
+                    <div class="row">
+                        <div class="col-lg-12 mb-4 mb-sm-5">
+                            <div class="card card-style1 border-0">
+                                <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6 mb-4 mb-lg-0">
+                                            
+                                            <img src="<%=user_data.image%>" alt="...">
+                                        </div>
+                                        <div class="col-lg-6 px-xl-10">
+                                            <div
+                                                class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                                <h3 class="h2 text-white mb-0"><%=user_data.name%></h3>
+                                                
+                                            </div>
+                                            <br><br>
+                                            <ul class="list-unstyled mb-1-9">
+                                                
+                                                <li class="mb-2 mb-xl-3 display-28"><span
+                                                        class="display-26 text-secondary me-2 font-weight-600">Experience:</span>
+                                                        <%=user_data.experience%></li>
+                                                <li class="mb-2 mb-xl-3 display-28"><span
+                                                        class="display-26 text-secondary me-2 font-weight-600">Email:</span>
+                                                        <%=user_data.email%></li>
+                                                
+                                                <li class="display-28"><span
+                                                        class="display-26 text-secondary me-2 font-weight-600">Phone:</span>
+                                                        <%=user_data.contact%></li>
+                                                        <br>
+                                                        <li class="display-28"><span
+                                                            class="display-26 text-secondary me-2 font-weight-600">Address:</span>
+                                                            <%=user_data.address%></li>
+                                            </ul>
+                                            <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
+                                                <li><a href="#!"><i class="ti-twitter-alt"></i></a></li>
+                                                <li><a href="#!"><i class="ti-facebook"></i></a></li>
+                                                <li><a href="#!"><i class="ti-pinterest"></i></a></li>
+                                                <li><a href="#!"><i class="ti-instagram"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mb-4 mb-sm-5">
+                            <div>
+                                <span class="section-title text-primary mb-3 mb-sm-4">About Me</span><br><br>
+                                <p><%=user_data.yourself%></p>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12 mb-4 mb-sm-5">
+                            <div>
+                                <span class="section-title text-primary mb-3 mb-sm-4">Skills</span><br><br>
+                                <p><%=user_data.skills%></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <%}else{%>
+
+                        <div class="row">
+                            <div class="col-lg-12 mb-4 mb-sm-5">
+                                <div class="card card-style1 border-0">
+                                    <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                                
+                                                <img src="<%=emp_data.image%>" alt="...">
+                                            </div>
+                                            <div class="col-lg-6 px-xl-10">
+                                                <div
+                                                    class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                                    <h3 class="h2 text-white mb-0"><%=emp_data.name%></h3>
+                                                    
+                                                </div>
+                                                <br><br>
+                                                <ul class="list-unstyled mb-1-9">
+                                                    
+                                                    <li class="mb-2 mb-xl-3 display-28"><span
+                                                        class="display-26 text-secondary me-2 font-weight-600">Company:</span>
+                                                        <%=emp_data.company%></li>
+                                                    <li class="mb-2 mb-xl-3 display-28"><span
+                                                            class="display-26 text-secondary me-2 font-weight-600">Email:</span>
+                                                            <%=emp_data.email%></li>
+                                                    
+                                                    <li class="display-28"><span
+                                                            class="display-26 text-secondary me-2 font-weight-600">Phone:</span>
+                                                            <%=emp_data.contact%></li>
+                                                            <br>
+                                                            <li class="display-28"><span
+                                                                class="display-26 text-secondary me-2 font-weight-600">Address:</span>
+                                                                <%=emp_data.address%></li>
+                                                </ul>
+                                                <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
+                                                    <li><a href="#!"><i class="ti-twitter-alt"></i></a></li>
+                                                    <li><a href="#!"><i class="ti-facebook"></i></a></li>
+                                                    <li><a href="#!"><i class="ti-pinterest"></i></a></li>
+                                                    <li><a href="#!"><i class="ti-instagram"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-4 mb-sm-5">
+                                <div>
+                                    <span class="section-title text-primary mb-3 mb-sm-4">About Me</span><br><br>
+                                    <p><%=emp_data.yourself%></p>
+                                    
+                                </div>
+                            </div>
+                            
+                           
+                            </div>
+                        </div>
+                        <%}%>
+                </div>
+            </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <%-include('common/footer')%>
+
+
+                <div class="modal" id="myModal">
+                    <div class="container">
+                        <div class="vertical-space-85"></div>
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+                                <div class="modal-body">
+                                    <button class="button button-rounded  close" data-dismiss="modal">&times;</button>
+                                    <video class="" controls>
+                                        <source src="video/Pexels_Videos_2706.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script data-cfasync="false" src="js/email-decode.min.js"></script>
+                <script src="js/jquery.min.js"></script>
+                <script src="js/bootstrap.min.js"></script>
+                <script src="owlcarousel/owl.carousel.min.js"></script>
+                <script src="js/jquery-ui.min.js"></script>
+
+                <script src="js/custom.js"></script>
+                <script>
+                    $(".search-icone").click(function () {
+                        // $(".menu").animate({height: "100vh"});
+                    });
+
+                </script>
+    </body>
+
+    </html>

@@ -55,12 +55,36 @@ const logincreate=(req,res)=>{
 }
 
 const dashboard=(req,res)=>{
-  
-        res.render('./admin/dashboard',{
-            title:"Admin || Dashboard",
-           data: req.admin,
-          
+    PostModel.find().then(result=>{
+        UserModel.find().then(result1=>{
+            EmployerModel.find().then(result2=>{
+                CategoryModel.find().then(result3=>{
+                    ActivityModel.find().then(result4=>{
+                        ContactModel.find().then(result5=>{
+                            res.render('./admin/dashboard',{
+                                title:"Admin || Dashboard",
+                               data: req.admin,
+                               post_data:result,
+                               jobseeker_data:result1,
+                               emp_data:result2,
+                               cat_data:result3,
+                               act_data:result4,
+                               cont_data:result5
+                              
+                            })
+                        })
+                        
+                    })
+                    
+                })
+                
+            })
+            
         })
+       
+    })
+  
+        
     
 }
 
@@ -220,14 +244,14 @@ const deactiveabout=(req,res)=>{
 const activejob=(req,res)=>{
     const post_id=req.params.id
     PostModel.findByIdAndUpdate(post_id,{status:true}).then(result=>{
-        res.redirect('/admin/dashboard')
+        res.redirect('/admin/jobpost')
     }
     )
 }
 const deactivejob=(req,res)=>{
     const post_id=req.params.id
     PostModel.findByIdAndUpdate(post_id,{status:false}).then(result=>{
-        res.redirect('/admin/dashboard')
+        res.redirect('/admin/jobpost')
     }
     )
 }

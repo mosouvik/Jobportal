@@ -18,6 +18,14 @@ const Employerschema=new schema({
         type:String,
         required:true
       },
+      yourself:{
+        type:String,
+        required:true
+      },
+      company:{
+        type:String,
+        required:true
+      },
       image:{
         type:String,
         required:true

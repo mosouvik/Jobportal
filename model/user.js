@@ -18,6 +18,18 @@ const Userschema=new schema({
         type:String,
         required:true
       },
+      yourself:{
+        type:String,
+        required:true
+      },
+      skills:{
+        type:String,
+        required:true
+      },
+      experience:{
+        type:String,
+        required:true
+      },
       image:{
         type:String,
         required:true
