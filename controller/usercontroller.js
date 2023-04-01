@@ -536,7 +536,6 @@ const contactcreate = (req, res) => {
 const Education_Training = (req, res) => {
     
         
-            console.log(result2);
             PostModel.aggregate([{
                 $match: { "category": "Education-Training" }
             }]).then(result => {
@@ -587,7 +586,6 @@ const Computer_Programing = (req, res) => {
 
 const Customer_Support = (req, res) => {
     
-        EmployerModel.findById(req.user.id).then(result2 => {
             PostModel.aggregate([{
                 $match: { "category": "Customer-Support" }
             }]).then(result => {
@@ -599,8 +597,6 @@ const Customer_Support = (req, res) => {
                 })
             })
        
-   
-})
 }
 
 const Design_Multimedia = (req, res) => {
@@ -685,7 +681,6 @@ const Full_Time = (req, res) => {
 }
 const Part_Time = (req, res) => {
     
-        EmployerModel.findById(req.user.id).then(result2 => {
             PostModel.aggregate([{
                 $match: { "job_nature": "Part-Time" }
             }]).then(result => {
@@ -696,9 +691,6 @@ const Part_Time = (req, res) => {
                     
                 })
             })
-        
-   
-})
 }
 const Freelancer = (req, res) => {
     
