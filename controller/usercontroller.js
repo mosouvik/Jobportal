@@ -129,8 +129,8 @@ const registercreate = (req, res) => {
                         secure: false,
                         requireTLS: true,
                         auth: {
-                            user: "msouvik112@gmail.com",
-                            pass: "prcvkneoulrjigxz",
+                            user: "....",
+                            pass: "....",
                         }
                     });
                     var mailOptions = {
