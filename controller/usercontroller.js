@@ -6,7 +6,7 @@ const AboutModel = require('../model/about')
 const AcitvityModel = require('../model/activity');
 const ContactModel = require('../model/contact');
 const TokenModel = require('../model/token');
-const Teammodel=require('../model/team');
+const Teammodel = require('../model/team');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
@@ -14,28 +14,29 @@ const nodemailer = require('nodemailer');
 const ActivityModel = require('../model/activity');
 
 const index = (req, res) => {
-    if(req.user){
-    EmployerModel.findById(req.user.id).then(result3=>{
-        categorymodel.find().then(result => {
-            PostModel.find().limit(5).sort("-createdAt").then(result2 => {
-                res.render('./user/index', {
-                    title: "home page",
-                    message: req.flash('message'),
-                    error: req.flash('error'),
-                    displayData: result,
-                    data: req.user,
-                    displayData2: result2,
-                    emp_data:result3
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result3 => {
+            categorymodel.find().then(result => {
+                PostModel.find().limit(5).sort("-createdAt").then(result2 => {
+                    console.log(result3);
+                    res.render('./user/index', {
+                        title: "home page",
+                        message: req.flash('message'),
+                        error: req.flash('error'),
+                        displayData: result,
+                        data: req.user,
+                        displayData2: result2,
+                        emp_data: result3
+                    })
+                }).catch(err => {
+                    console.log(err);
                 })
             }).catch(err => {
                 console.log(err);
             })
-        }).catch(err => {
-            console.log(err);
         })
-    })
-    
-    }else{
+
+    } else {
         categorymodel.find().then(result => {
             PostModel.find().limit(5).sort("-createdAt").then(result2 => {
                 res.render('./user/index', {
@@ -45,7 +46,8 @@ const index = (req, res) => {
                     displayData: result,
                     data: req.user,
                     displayData2: result2,
-                    
+                    emp_data: ""
+
                 })
             }).catch(err => {
                 console.log(err);
@@ -57,48 +59,48 @@ const index = (req, res) => {
 }
 
 const job = (req, res) => {
-    if(req.user){
-    EmployerModel.findById(req.user.id).then(result3=>{
-    PostModel.find().sort('-createdAt').then(result => {
-        res.render('./user/job', {
-            title: "job list page",
-            data: req.user,
-            displayData: result,
-            emp_data:result3
-        })
-    })
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result3 => {
+            PostModel.find().sort('-createdAt').then(result => {
+                res.render('./user/job', {
+                    title: "job list page",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result3
+                })
+            })
 
-})
-    }else{
+        })
+    } else {
         PostModel.find().sort('-createdAt').then(result => {
             res.render('./user/job', {
                 title: "job list page",
                 data: req.user,
                 displayData: result,
-                
+                emp_data: ""
             })
         })
     }
 }
 
 const register = (req, res) => {
-    
+
     res.render('./user/register', {
         title: " register page",
         message: req.flash('message'),
         error: req.flash('error'),
         data: req.user,
-       
+
     })
 }
 const register_emp = (req, res) => {
-    
+
     res.render('./user/register_emp', {
         title: " register page",
         message: req.flash('message'),
         error: req.flash('error'),
         data: req.user,
-        
+
     })
 
 }
@@ -109,9 +111,9 @@ const registercreate = (req, res) => {
 
         name: req.body.name,
         email: req.body.email,
-        skills:req.body.skills,
-        experience:req.body.experience,
-        yourself:req.body.yourself,
+        skills: req.body.skills,
+        experience: req.body.experience,
+        yourself: req.body.yourself,
         contact: req.body.contact,
         address: req.body.address,
         password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
@@ -156,7 +158,7 @@ const registercreate = (req, res) => {
             console.log("Error When Create User....", err);
         }
     })
-   
+
 }
 
 
@@ -196,8 +198,8 @@ const registercreate_emp = (req, res) => {
 
         name: req.body.name,
         email: req.body.email,
-        yourself:req.body.yourself,
-        company:req.body.company,
+        yourself: req.body.yourself,
+        company: req.body.company,
 
         contact: req.body.contact,
         address: req.body.address,
@@ -242,7 +244,7 @@ const registercreate_emp = (req, res) => {
         } else {
             console.log("Error When Create User....", err);
         }
-    })  
+    })
 }
 
 
@@ -277,7 +279,7 @@ const empconfirmation = (req, res) => {
 
 
 const login = (req, res) => {
-    
+
     loginData = {}
     loginData.email = (req.cookies.email) ? req.cookies.email : undefined,
         loginData.password = (req.cookies.password) ? req.cookies.password : undefined,
@@ -366,7 +368,7 @@ const logincreate_emp = (req, res) => {
             if (data.isVerified) {
                 if (data.status) {
                     const haspassword = data.password
-    
+
                     if (bcrypt.compareSync(req.body.password, haspassword)) {
                         const token = jwt.sign({
                             id: data._id,
@@ -380,13 +382,13 @@ const logincreate_emp = (req, res) => {
                             res.cookie('password', req.body.password)
                         }
                         console.log(data, "login successfully");
-    
-    
+
+
                         req.flash('message', "Login successfully..")
-    
+
                         res.redirect('/postjob')
-    
-    
+
+
                     } else {
                         console.log("password incorect");
                         req.flash('error', "Password Incorrect")
@@ -396,11 +398,11 @@ const logincreate_emp = (req, res) => {
                     req.flash('error', 'Admin has blocked your account')
                     res.redirect('/login_emp')
                 }
-            }else{
-                req.flash('error','Verify account first')
+            } else {
+                req.flash('error', 'Verify account first')
                 res.redirect('/login_emp')
             }
-            
+
 
 
         } else {
@@ -413,23 +415,23 @@ const logincreate_emp = (req, res) => {
 
 
 const postjob = (req, res) => {
-    EmployerModel.findById(req.user.id).then(result3=>{
-    const emp_status = req.user.isEmployer
-    if (emp_status) {
-        res.render('./user/postjob', {
-            title: "Post job page",
-            message: req.flash('message'),
-            error: req.flash('error'),
-            data: req.user,
-            emp_data:result3
-        })
-    } else {
-        req.flash('error', "You are not Employer...")
+    EmployerModel.findById(req.user.id).then(result3 => {
+        const emp_status = req.user.isEmployer
+        if (emp_status) {
+            res.render('./user/postjob', {
+                title: "Post job page",
+                message: req.flash('message'),
+                error: req.flash('error'),
+                data: req.user,
+                emp_data: result3
+            })
+        } else {
+            req.flash('error', "You are not Employer...")
 
-        res.redirect('/')
-    }
+            res.redirect('/')
+        }
 
-})
+    })
 }
 
 const postcreate = (req, res) => {
@@ -465,64 +467,65 @@ const postcreate = (req, res) => {
 }
 
 const contact = (req, res) => {
-    if(req.user){
-        EmployerModel.findById(req.user.id).then(result3=>{
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result3 => {
             res.render('./user/contact', {
                 title: "contact page",
                 data: req.user,
                 message: req.flash('message'),
                 error: req.flash('error'),
-                emp_data:result3
-        
+                emp_data: result3
+
             })
         })
-    }else{
+    } else {
         res.render('./user/contact', {
             title: "contact page",
             data: req.user,
             message: req.flash('message'),
             error: req.flash('error'),
-            
-    
+            emp_data: ""
+
         })
     }
-    
+
 }
 
 
 
 const about = (req, res) => {
-    if(req.user){
-        EmployerModel.findById(req.user.id).then(result3=>{
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result3 => {
             AboutModel.find().then(result => {
-                Teammodel.find().then(result2=>{
-                    
+                Teammodel.find().then(result2 => {
+
                     res.render('./user/about', {
                         title: "About page",
                         data: req.user,
                         displayData: result,
-                        emp_data:result3,
-                        team:result2,
+                        emp_data: result3,
+                        team: result2,
                     })
                 })
-                
+
             })
-        
+
         })
-    }else{
+    } else {
         AboutModel.find().then(result => {
-            Teammodel.find().then(result2=>{
+            Teammodel.find().then(result2 => {
                 res.render('./user/about', {
                     title: "About page",
                     data: req.user,
                     displayData: result,
-                    team:result2
+                    team: result2,
+                    emp_data: ""
                 })
             })
-            
+
         })
     }
-    
+
 }
 
 const auth = (req, res, next) => {
@@ -559,19 +562,19 @@ const catc = (req, res) => {
     })
 }
 
-const contactcreate=(req,res)=>{
-    const cdata=new ContactModel({
-        name:req.body.name,
-        email:req.body.email,
-        subject:req.body.subject,
-        contact:req.body.contact,
-        message:req.body.message
+const contactcreate = (req, res) => {
+    const cdata = new ContactModel({
+        name: req.body.name,
+        email: req.body.email,
+        subject: req.body.subject,
+        contact: req.body.contact,
+        message: req.body.message
     })
-    cdata.save().then(result=>{
-        req.flash('message',"Contact added successfull");
+    cdata.save().then(result => {
+        req.flash('message', "Contact added successfull");
         res.redirect('/contact')
-    }).catch(err=>{
-        req.flash('error',"Contact data not added.");
+    }).catch(err => {
+        req.flash('error', "Contact data not added.");
         res.redirect('/contact')
     })
 }
@@ -581,161 +584,340 @@ const contactcreate=(req,res)=>{
 //,.,..Category
 
 const Education_Training = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "category": "Education-Training" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Education-Training",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            console.log(result2);
+            PostModel.aggregate([{
+                $match: { "category": "Education-Training" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Education-Training",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "category": "Education-Training" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Education-Training",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+
+            })
+        })
+    }
 }
 const Medical_Pharma = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "category": "Medical-Pharma" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Medical_Pharma",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([{
+                $match: { "category": "Medical-Pharma" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Medical-Pharma",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "category": "Medical-Pharma" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Medical-Pharma",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+            })
+        })
+    }
+
 }
 
 const Computer_Programing = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "category": "Computer-Programing" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Computer-Programing",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([{
+                $match: { "category": "Computer-Programing" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Computer-Programing",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "category": "Computer-Programing" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Computer-Programing",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+            })
+        })
+    }
 }
 
 const Customer_Support = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "category": "Customer-Support" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Customer-Support",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([{
+                $match: { "category": "Customer-Support" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Customer-Support",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "category": "Customer-Support" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Customer-Support",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+            })
+        })
+    }
 }
 
 const Design_Multimedia = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "category": "Design-Multimedia" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Design-Multimedia",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([{
+                $match: { "category": "Design-Multimedia" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Design-Multimedia",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "category": "Design-Multimedia" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Design-Multimedia",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+            })
+        })
+    }
 }
 const Web_Development = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "category": "Web-Development" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Web-Development",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([{
+                $match: { "category": "Web-Development" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Web-Development",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "category": "Web-Development" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Web-Development",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+            })
+        })
+    }
 }
 const Engineer_Architects = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "category": "Engineer-Architects" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Engineer-Architects",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([{
+                $match: { "category": "Engineer-Architects" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Engineer-Architects",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "category": "Engineer-Architects" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Engineer-Architects",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+            })
+        })
+    }
 }
 const Sales_Marketing = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "category": "Sales-Marketing" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Sales-Marketing",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([{
+                $match: { "category": "Sales-Marketing" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Sales-Marketing",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "category": "Sales-Marketing" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Sales-Marketing",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+            })
+        })
+    }
 }
 
 const Full_Time = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "job_nature": "Full-Time" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Full-Time",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([{
+                $match: { "job_nature": "Full-Time" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Full-Time",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "job_nature": "Full-Time" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Full-Time",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+            })
+        })
+    }
 }
 const Part_Time = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "job_nature": "Part-Time" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Part-Time",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([{
+                $match: { "job_nature": "Part-Time" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Part-Time",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "job_nature": "Part-Time" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Part-Time",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+            })
+        })
+    }
 }
 const Freelancer = (req, res) => {
-    PostModel.aggregate([{
-        $match: { "job_nature": "Freelancer" }
-    }]).then(result => {
-        res.render('./user/job', {
-            title: "Freelancer",
-            data: req.user,
-            displayData: result
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([{
+                $match: { "job_nature": "Freelancer" }
+            }]).then(result => {
+                res.render('./user/job', {
+                    title: "Freelancer",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
         })
-    })
+    } else {
+        PostModel.aggregate([{
+            $match: { "job_nature": "Freelancer" }
+        }]).then(result => {
+            res.render('./user/job', {
+                title: "Freelancer",
+                data: req.user,
+                displayData: result,
+                emp_data: ""
+            })
+        })
+    }
 }
 
 const view_job = (req, res) => {
-    EmployerModel.findById(req.user.id).then(result3=>{
-    const id = req.params.id
-    const u_id = req.user.id
-    PostModel.findById(id).then(result => {
-        ActivityModel.aggregate([
-            {
-                $match:
+    EmployerModel.findById(req.user.id).then(result3 => {
+        const id = req.params.id
+        const u_id = req.user.id
+        PostModel.findById(id).then(result => {
+            ActivityModel.aggregate([
                 {
-                    "user_id": `${u_id}`,
-                    "post_id": `${id}`
+                    $match:
+                    {
+                        "user_id": `${u_id}`,
+                        "post_id": `${id}`
+                    }
                 }
-            }
-        ]).then(result2 => {
+            ]).then(result2 => {
 
-            res.render('./user/job_details', {
-                title: 'Job Details',
-                data: req.user,
-                displayData: result,
-                displayData2: result2,
-                message: req.flash('message'),
-                error: req.flash('error'),
-                emp_data:result3
+                res.render('./user/job_details', {
+                    title: 'Job Details',
+                    data: req.user,
+                    displayData: result,
+                    displayData2: result2,
+                    message: req.flash('message'),
+                    error: req.flash('error'),
+                    emp_data: result3
+                })
+
             })
 
         })
 
     })
-
-})
 }
 
 const apply = (req, res) => {
@@ -751,6 +933,7 @@ const apply = (req, res) => {
                 const save_data = new AcitvityModel({
                     user_id: `${result2._id}`,
                     user_name: result2.name,
+                    emp_name: result.emp_name,
                     post_id: `${result._id}`,
                     post_title: result.jobtitle,
                     location: result.location,
@@ -773,72 +956,72 @@ const apply = (req, res) => {
 
 
 const appliedjobs = (req, res) => {
-    EmployerModel.findById(req.user.id).then(result3=>{
-    if (!req.user.isEmployer) {
-        const id = req.user.id
-        ActivityModel.aggregate([
-            { $match: { "user_id": `${id}` } }
-        ]).then(result => {
-            console.log(result);
-            res.render('./user/applied', {
-                title: "Applied Jobs",
-                data: req.user,
-                displayData: result,
-                emp_data:result3
+    EmployerModel.findById(req.user.id).then(result3 => {
+        if (!req.user.isEmployer) {
+            const id = req.user.id
+            ActivityModel.aggregate([
+                { $match: { "user_id": `${id}` } }
+            ]).then(result => {
+                console.log(result);
+                res.render('./user/applied', {
+                    title: "Applied Jobs",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result3
+                })
             })
-        })
-    } else {
-        req.flash('error', "Employer cannot have applied jobs")
-        res.redirect('/')
-    }
-})
+        } else {
+            req.flash('error', "Employer cannot have applied jobs")
+            res.redirect('/')
+        }
+    })
 }
 
 
 // search..
-const search=(req,res)=>{
-    if(req.user){
-        EmployerModel.findById(req.user.id).then(result3=>{
+const search = (req, res) => {
+    if (req.user) {
+        EmployerModel.findById(req.user.id).then(result3 => {
             PostModel.aggregate([
-                {$match:{company:req.body.input}}
-            ]).then(result=>{
+                { $match: { company: req.body.input } }
+            ]).then(result => {
                 console.log(result);
-                res.render('./user/job',{
-                    title:"joblist page",
-                    data:req.user,
-                    displayData:result,
-                    emp_data:result3
-                    
+                res.render('./user/job', {
+                    title: "joblist page",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result3
+
                 })
             })
         })
-    }else{
+    } else {
         PostModel.aggregate([
-            {$match:{company:req.body.input}}
-        ]).then(result=>{
+            { $match: { company: req.body.input } }
+        ]).then(result => {
             console.log(result);
-            res.render('./user/job',{
-                title:"joblist page",
-                data:req.user,
-                displayData:result,
-                
-                
+            res.render('./user/job', {
+                title: "joblist page",
+                data: req.user,
+                displayData: result,
+
+
             })
         })
     }
-    
+
 }
-const profile=(req,res)=>{
-    UserModel.findById(req.user.id).then(result3=>{
-        EmployerModel.findById(req.user.id).then(result2=>{
-        res.render('./user/profile',{
-            title:"Profile",
-            data:req.user,
-            user_data:result3,
-            emp_data:result2
+const profile = (req, res) => {
+    UserModel.findById(req.user.id).then(result3 => {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            res.render('./user/profile', {
+                title: "Profile",
+                data: req.user,
+                user_data: result3,
+                emp_data: result2
+            })
         })
     })
-})
 }
 
 
@@ -846,24 +1029,80 @@ const profile=(req,res)=>{
 
 // test
 
-const team=(req,res)=>{
+const team = (req, res) => {
     res.render('./user/team')
 }
 
-const ct=(req,res)=>{
-    const image=req.file
+const ct = (req, res) => {
+    const image = req.file
     Teammodel({
-        name:req.body.name,
-        image:image.path,
-        message:req.body.message,
-    }).save().then(result=>{
+        name: req.body.name,
+        image: image.path,
+        message: req.body.message,
+    }).save().then(result => {
         console.log(result);
         res.redirect('/team')
     })
 
 }
 
+
+const viewactivity = (req, res) => {
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            PostModel.aggregate([
+                { $match: { "emp_name": req.user.name } }
+            ]).then(result => {
+                console.log(result);
+                res.render('./user/viewact', {
+                    title: "Activity",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
+        })
+    }
+}
+const viewapply = (req, res) => {
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            ActivityModel.aggregate([
+                { $match: { "emp_name": req.user.name } }
+            ]).then(result => {
+                console.log(result);
+                res.render('./user/viewapply', {
+                    title: "Activity",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
+        })
+    }
+}
+
+const viewprofile = (req, res) => {
+    const name = req.params.name
+    if (req.user.isEmployer) {
+        EmployerModel.findById(req.user.id).then(result2 => {
+            UserModel.findOne({ name: name }).then(result => {
+                console.log(result);
+                res.render('./user/viewprofile', {
+                    title: "View Profile",
+                    data: req.user,
+                    displayData: result,
+                    emp_data: result2
+                })
+            })
+        })
+    }
+}
+
 module.exports = {
+    viewprofile,
+    viewactivity,
+    viewapply,
     team,
     ct,
     index,

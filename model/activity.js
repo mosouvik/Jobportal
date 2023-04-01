@@ -10,6 +10,10 @@ const Activityschema = new schema({
         type: String,
         required: true
     },
+    emp_name: {
+        type: String,
+        required: true
+    },
     post_id: {
         type: String,
         required: true

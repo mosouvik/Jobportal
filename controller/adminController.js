@@ -62,17 +62,21 @@ const dashboard=(req,res)=>{
                 CategoryModel.find().then(result3=>{
                     ActivityModel.find().then(result4=>{
                         ContactModel.find().then(result5=>{
-                            res.render('./admin/dashboard',{
-                                title:"Admin || Dashboard",
-                               data: req.admin,
-                               post_data:result,
-                               jobseeker_data:result1,
-                               emp_data:result2,
-                               cat_data:result3,
-                               act_data:result4,
-                               cont_data:result5
-                              
+                            TeamModel.find().then(result6=>{
+                                res.render('./admin/dashboard',{
+                                    title:"Admin || Dashboard",
+                                   data: req.admin,
+                                   post_data:result,
+                                   jobseeker_data:result1,
+                                   emp_data:result2,
+                                   cat_data:result3,
+                                   act_data:result4,
+                                   cont_data:result5,
+                                   team_data:result6
+                                  
+                                })
                             })
+                           
                         })
                         
                     })

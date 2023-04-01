@@ -58,7 +58,7 @@ Route.get('/appliedjobs',UserController.auth,UserController.appliedjobs)
 Route.post('/search',UserController.search)
 
 //...profile
-Route.get('/profile',UserController.profile)
+Route.get('/profile',UserController.auth,UserController.profile)
 
 
 
@@ -68,6 +68,13 @@ Route.get('/profile',UserController.profile)
 
 Route.get('/team',UserController.team);
 Route.post('/ct',UserController.ct);
+
+//view activity
+Route.get('/viewactivity',UserController.auth,UserController.viewactivity)
+Route.get('/viewapply',UserController.auth,UserController.viewapply)
+
+//view profile
+Route.get('/viewprofile/:name',UserController.auth,UserController.viewprofile)
 
 
 module.exports=Route

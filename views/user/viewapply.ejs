@@ -1,0 +1,109 @@
+<%-include('common/head')%>
+
+<body>
+
+<%-include('common/nav')%>
+    
+
+
+    <section id="intro">
+        <div class="carousel-item active">
+            <div class="carousel-background"><img src="imags/slider/slider1.jpg" alt=""></div>
+            <div class="carousel-container">
+                <div class="carousel-content">
+                    <h2 class="font-color-white">Who has Applied for your jobs </h2>
+                    <p class="font-color-white">Down below are the list of jobseekers who has applied for your jobs  </p>
+                    <a href="#" data-toggle="modal" data-target="#myModal"><i
+                            class=" material-icons play">play_arrow</i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+   
+
+
+    <section id="resent-job-post" class="background-color-white-drak">
+        <div class="vertical-space-85"></div>
+        <div class="container text-center">
+            <h4 class="text-left"></h4>
+            <div class="vertical-space-30"></div>
+            <div class="row">
+                
+                <div class="col-lg-8 col-md-12">
+                    
+                    <h2>List of Employers who has applied</h2>
+                    
+                    <div class="detail width-100 ">
+                        <%if(displayData.length>0){
+                            for(let data of displayData){%>
+                                <br>
+                                
+                        <div class="media display-inline text-align-center">
+                            <img src="<%=data.image%>" height="50px" width="50px" alt="John Doe" class="mr-3 ">
+                            <div class="media-body text-left  text-align-center">
+                                <h6><a href="#" class="font-color-black"><%=data.post_title%></a>
+                                </h6>
+                                <i class="large material-icons">account_balance</i>
+                                <span class="text"><%=data.post_company%></span>
+                                <br />
+                                <i class="large material-icons">place</i>
+                                <span class="text font-size"><%=data.location%></span>
+                                <br>
+                                <span class="text font-size"><%=data.category%></span>
+                                <br>
+                                <div class="float-right margin-top text-align-center">
+                                    <a href="/viewprofile/<%=data.user_name%>" class="part-full-time"><%=data.user_name%></a><br><br><br><br>
+                                    <p class="date-time">Applied On:<%=data.appliedAt.toDateString()%></p>
+                                </div>
+                            </div>
+                        </div>
+                        <%}}else{%>
+                                <h2>No Applied Jobs</h2>
+                        <%}%>
+                    </div>
+                    
+                    
+                    
+                    <div class="vertical-space-20"></div>
+                    <div class="vertical-space-25"></div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="vertical-space-60"></div>
+    </section>
+
+
+    <%-include('common/footer')%>
+
+
+    <div class="modal" id="myModal">
+        <div class="container">
+            <div class="vertical-space-85"></div>
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <button class="button button-rounded  close" data-dismiss="modal">&times;</button>
+                        <video class="" controls>
+                            <source src="video/Pexels_Videos_2706.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="owlcarousel/owl.carousel.min.js"></script>
+
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>
