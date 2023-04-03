@@ -14,45 +14,49 @@ const nodemailer = require('nodemailer');
 const ActivityModel = require('../model/activity');
 
 const index = (req, res) => {
-    
-       
-            categorymodel.find().then(result => {
-                PostModel.find().limit(5).sort("-createdAt").then(result2 => {
-                    
-                    res.render('./user/index', {
-                        title: "home page",
-                        message: req.flash('message'),
-                        error: req.flash('error'),
-                        displayData: result,
-                        data: req.user,
-                        displayData2: result2,
-                        
-                    })
-                }).catch(err => {
-                    console.log(err);
-                })
-            }).catch(err => {
-                console.log(err);
-            })
-        
 
-    
+
+    categorymodel.find().then(result => {
+        PostModel.find().limit(5).sort("-createdAt").then(result2 => {
+
+            res.render('./user/index', {
+                title: "home page",
+                message: req.flash('message'),
+                error: req.flash('error'),
+                displayData: result,
+                data: req.user,
+                displayData2: result2,
+
+            })
+        }).catch(err => {
+            console.log(err);
+        })
+    }).catch(err => {
+        console.log(err);
+    })
+
+
+
 }
 
 const job = (req, res) => {
-   
-        
-            PostModel.find().sort('-createdAt').then(result => {
-                res.render('./user/job', {
-                    title: "job list page",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
-            })
 
-       
-   
+
+    PostModel.find().sort('-createdAt').then(result => {
+        categorymodel.find().then(result2 => {
+
+            res.render('./user/job', {
+                title: "job list page",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
+            })
+        })
+
+    })
+
+
+
 }
 
 const register = (req, res) => {
@@ -439,42 +443,42 @@ const postcreate = (req, res) => {
 }
 
 const contact = (req, res) => {
-    
-        
-            res.render('./user/contact', {
-                title: "contact page",
-                data: req.user,
-                message: req.flash('message'),
-                error: req.flash('error'),
-                
 
-            })
-        
-   
+
+    res.render('./user/contact', {
+        title: "contact page",
+        data: req.user,
+        message: req.flash('message'),
+        error: req.flash('error'),
+
+
+    })
+
+
 
 }
 
 
 
 const about = (req, res) => {
-    
-        
-            AboutModel.find().then(result => {
-                Teammodel.find().then(result2 => {
 
-                    res.render('./user/about', {
-                        title: "About page",
-                        data: req.user,
-                        displayData: result,
-                        
-                        team: result2,
-                    })
-                })
 
+    AboutModel.find().then(result => {
+        Teammodel.find().then(result2 => {
+
+            res.render('./user/about', {
+                title: "About page",
+                data: req.user,
+                displayData: result,
+
+                team: result2,
             })
+        })
 
-       
-    
+    })
+
+
+
 
 }
 
@@ -534,178 +538,234 @@ const contactcreate = (req, res) => {
 //,.,..Category
 
 const Education_Training = (req, res) => {
-    
-        
-            PostModel.aggregate([{
-                $match: { "category": "Education-Training" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Education-Training",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
+
+
+    PostModel.aggregate([{
+        $match: { "category": "Education-Training" }
+
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+            res.render('./user/job', {
+                title: "Education-Training",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
             })
-        
-   
+        })
+
+    })
+
+
 }
 const Medical_Pharma = (req, res) => {
-    
-        
-            PostModel.aggregate([{
-                $match: { "category": "Medical-Pharma" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Medical-Pharma",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
+
+
+    PostModel.aggregate([{
+        $match: { "category": "Medical-Pharma" }
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+            res.render('./user/job', {
+                title: "Medical-Pharma",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
             })
-        
-    
+        })
+
+    })
+
+
 
 }
 
 const Computer_Programing = (req, res) => {
-   
-        
-            PostModel.aggregate([{
-                $match: { "category": "Computer-Programing" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Computer-Programing",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
+
+
+    PostModel.aggregate([{
+        $match: { "category": "Computer-Programing" }
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+            res.render('./user/job', {
+                title: "Computer-Programing",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
             })
-        
-   
+        })
+
+    })
+
+
 }
 
 const Customer_Support = (req, res) => {
-    
-            PostModel.aggregate([{
-                $match: { "category": "Customer-Support" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Customer-Support",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
+
+    PostModel.aggregate([{
+        $match: { "category": "Customer-Support" }
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+            res.render('./user/job', {
+                title: "Customer-Support",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
             })
-       
+        })
+
+    })
+
 }
 
 const Design_Multimedia = (req, res) => {
-   
-        
-            PostModel.aggregate([{
-                $match: { "category": "Design-Multimedia" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Design-Multimedia",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
-            })     
-    
+
+
+    PostModel.aggregate([{
+        $match: { "category": "Design-Multimedia" }
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+            res.render('./user/job', {
+                title: "Design-Multimedia",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
+            })
+        })
+
+    })
+
 }
 const Web_Development = (req, res) => {
-   
-        
-            PostModel.aggregate([{
-                $match: { "category": "Web-Development" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Web-Development",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
+
+
+    PostModel.aggregate([{
+        $match: { "category": "Web-Development" }
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+            res.render('./user/job', {
+                title: "Web-Development",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
             })
-       
-   
+        })
+
+    })
+
+
 }
 const Engineer_Architects = (req, res) => {
-    
-        
-            PostModel.aggregate([{
-                $match: { "category": "Engineer-Architects" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Engineer-Architects",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
+
+
+    PostModel.aggregate([{
+        $match: { "category": "Engineer-Architects" }
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+            res.render('./user/job', {
+                title: "Engineer-Architects",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
             })
-       
-   
+        })
+
+    })
+
+
 }
 const Sales_Marketing = (req, res) => {
-   
-        
-            PostModel.aggregate([{
-                $match: { "category": "Sales-Marketing" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Sales-Marketing",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
+
+
+    PostModel.aggregate([{
+        $match: { "category": "Sales-Marketing" }
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+            res.render('./user/job', {
+                title: "Sales-Marketing",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
             })
-        
-   
+        })
+
+    })
+
+
 }
 
 const Full_Time = (req, res) => {
-    
-        
-            PostModel.aggregate([{
-                $match: { "job_nature": "Full-Time" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Full-Time",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
+
+
+    PostModel.aggregate([{
+        $match: { "job_nature": "Full-Time" }
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+
+            res.render('./user/job', {
+                title: "Full-Time",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
             })
-        
+        })
+    })
+
 
 }
 const Part_Time = (req, res) => {
-    
-            PostModel.aggregate([{
-                $match: { "job_nature": "Part-Time" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Part-Time",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
+
+    PostModel.aggregate([{
+        $match: { "job_nature": "Part-Time" }
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+
+            res.render('./user/job', {
+                title: "Part-Time",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
             })
+        })
+    })
 }
 const Freelancer = (req, res) => {
-    
-        
-            PostModel.aggregate([{
-                $match: { "job_nature": "Freelancer" }
-            }]).then(result => {
-                res.render('./user/job', {
-                    title: "Freelancer",
-                    data: req.user,
-                    displayData: result,
-                    
-                })
+
+
+    PostModel.aggregate([{
+        $match: { "job_nature": "Freelancer" }
+    },
+    { $sort: { 'createdAt': -1 } }
+    ]).then(result => {
+        categorymodel.find().then(result2 => {
+
+            res.render('./user/job', {
+                title: "Freelancer",
+                data: req.user,
+                displayData: result,
+                displayData2: result2
             })
-        
+        })
+    })
+
 }
 
 const view_job = (req, res) => {

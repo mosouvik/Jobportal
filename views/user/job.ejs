@@ -54,17 +54,12 @@ margin-left: 380px;
                     <div class="Job-Category-box">
                         <p class="title">Job Category</p>
                         <ul>
-                            <li class="list-item1 "><a href="/Web-Development" class="font-color-black">Web Developer </a></li>
-                            <li class="list-item1 "><a href="/Education-Training" class="font-color-black">Education & Training </a>
-                            </li>
-                            <li class="list-item1 "><a href="/Computer-Programing" class="font-color-black">Computer Programing</a></li>
-                            <li class="list-item1 "><a href="/Design-Multimedia" class="font-color-black">Design & Multimedia </a>
-                            <li class="list-item1 "><a href="/Sales-Marketing" class="font-color-black">Sales and Marketing </a>
-                            <li class="list-item1 "><a href="/Customer-Support" class="font-color-black">Customer Support </a>
-                            </li>
-                            <li class="list-item1 "><a href="/Medical-Pharma" class="font-color-black">Medical/Pharma </a>
-                            </li>
-                            <li class="list-item1 "><a href="/Engineer-Architects" class="font-color-black">Engineer/Architects </a></li>
+                        <%if(displayData2.length >0){
+                            for(let data of displayData2){
+                                if(data.status){%>
+
+                            <li class="list-item1 "><a href="/<%=data.category%>" class="font-color-black"><%=data.category%></a></li>
+                            <%}}}%>
                         </ul>
                     </div>
                 
