@@ -865,29 +865,35 @@ const search = (req, res) => {
             PostModel.aggregate([
                 { $match: { company: req.body.input } }
             ]).then(result => {
-                console.log(result);
-                res.render('./user/job', {
-                    title: "joblist page",
-                    data: req.user,
-                    displayData: result,
-                    emp_data: result3
-
-                })
+                
+                    res.render('./user/job', {
+                        title: "joblist page",
+                        data: req.user,
+                        displayData: result,
+                        emp_data: result3,
+                       
+                    })
+                
+                
+                
             })
         })
     } else {
         PostModel.aggregate([
             { $match: { company: req.body.input } }
         ]).then(result => {
-            console.log(result);
+            
+
+         
             res.render('./user/job', {
                 title: "joblist page",
                 data: req.user,
                 displayData: result,
-
+                
 
             })
-        })
+      
+    })
     }
 
 }
