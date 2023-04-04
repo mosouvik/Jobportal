@@ -865,29 +865,18 @@ const search = (req, res) => {
             PostModel.aggregate([
                 { $match: { company: req.body.input } }
             ]).then(result => {
-<<<<<<< HEAD
-                
-=======
                 categorymodel.find().then(result2=>{
                     console.log(result);
->>>>>>> ff9a2d4e475d7da3ec2baad75fc5c15681b37acc
                     res.render('./user/job', {
                         title: "joblist page",
                         data: req.user,
                         displayData: result,
                         emp_data: result3,
-<<<<<<< HEAD
-                       
-                    })
-                
-                
-=======
                         displayData2:result2
-
+                    })
     
                     })
-                })
->>>>>>> ff9a2d4e475d7da3ec2baad75fc5c15681b37acc
+             
                 
             })
         })
@@ -895,34 +884,27 @@ const search = (req, res) => {
         PostModel.aggregate([
             { $match: { company: req.body.input } }
         ]).then(result => {
-<<<<<<< HEAD
             
 
          
-=======
+
             categorymodel.find().then(result2=>{
             console.log(result);
->>>>>>> ff9a2d4e475d7da3ec2baad75fc5c15681b37acc
             res.render('./user/job', {
                 title: "joblist page",
                 data: req.user,
                 displayData: result,
-<<<<<<< HEAD
-                
+                displayData2:result2
 
             })
       
     })
-=======
-                displayData2:result2
-
+                
             })
-        })
-        })
->>>>>>> ff9a2d4e475d7da3ec2baad75fc5c15681b37acc
+      
     }
-
 }
+
 const profile = (req, res) => {
     UserModel.findById(req.user.id).then(result3 => {
         EmployerModel.findById(req.user.id).then(result2 => {
@@ -1010,6 +992,7 @@ const viewprofile = (req, res) => {
         })
     }
 }
+
 
 module.exports = {
     viewprofile,
