@@ -11,7 +11,7 @@ const adminauth=require('./middleware/adminAuth')
 const userauth=require('./middleware/auth');
 
 
-const port=2345
+const port=process.env.PORT || 2345
 const app=express();
 
 

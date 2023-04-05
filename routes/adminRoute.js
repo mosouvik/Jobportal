@@ -6,6 +6,7 @@ Route.get('/admin/',AdminController.login);
 Route.post('/admin/logincreate',AdminController.logincreate);
 Route.get('/admin/dashboard',AdminController.adminauth,AdminController.dashboard);
 Route.get('/admin/jobcategory',AdminController.adminauth,AdminController.jobcategory);
+Route.post('/admin/categorycreate',AdminController.categorycreate)
 Route.get('/admin/jobseeker',AdminController.adminauth,AdminController.jobseeker)
 Route.get('/admin/employer',AdminController.adminauth,AdminController.employer)
 Route.get('/admin/jobpost',AdminController.jobpost);
@@ -21,6 +22,8 @@ Route.get('/admin/deactivecategory/:id',AdminController.deactivecategory)
 // ....about....
 
 Route.get('/admin/about',AdminController.adminauth,AdminController.about);
+Route.post('/admin/aboutcreate',AdminController.aboutcreate);
+
 Route.get('/admin/deactiveabout/:id',AdminController.deactiveabout)
 Route.get('/admin/activeabout/:id',AdminController.activeabout)
 
@@ -47,6 +50,7 @@ Route.get('/admin/contact',AdminController.adminauth,AdminController.contact);
 
 
 Route.get('/admin/team',AdminController.adminauth,AdminController.team);
+Route.post('/admin/teamcreat',AdminController.teamcreat);
 
 Route.get('/admin/activeteam/:id',AdminController.activeteam);
 Route.get('/admin/deactiveteam/:id',AdminController.deactiveteam);
