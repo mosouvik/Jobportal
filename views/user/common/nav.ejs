@@ -51,7 +51,8 @@
                                     <li><a href="/about">About</a></li>
                                     <li><a href="/contact">Contact</a></li>
              
-                                </ul>
+                                
+                                
                                 <%if(data.isEmployer){%>
                                 <div class=" Post-Jobs">
                                     <a href="/postjob" class="">
@@ -59,24 +60,47 @@
                                     </a>
                                 
                                 </div>
-                                <%}%>
-                               
-                               <ul class="main_nav">
+                                <%}%> 
                                 <li></li>
-                                <li><a href="/profile">Profile</a></li>
-                                <li></li>
+                               <li style="color: white;">Hi <%=data.name%> </li>
+                                <ul class="main_nav"> 
+                                                                                
+                               <div class="dropdown">
+                                <a
+                                  class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                                  href="#"
+                                  id="navbarDropdownMenuAvatar"
+                                  role="button"
+                                  data-mdb-toggle="dropdown"
+                                  aria-expanded="false"
                                 
-                               </ul>
-                               
-                                <ul class="main_nav">
-                                    
-                                    <li style="color: white;">Hi <%=data.name%> </li>
-                                     <li><img class="img-profile rounded-circle" height="40px" width="40px" src="/<%=data.pic%>" alt="img"></li>
-                                    <li><a href="/logout">Logout</a></li>
+                                >
+                                  <img
+                                    src="/<%=data.pic%>"
+                                    class="rounded-circle"
+                                    height="40"
+                                    width="40"
+                                    alt="img"
+                                    loading="lazy"
+                                  />
+                                </a>
+                                <ul
+                                  class="dropdown-menu dropdown-menu-end"
+                                  aria-labelledby="navbarDropdownMenuAvatar"
+                                >
+                                  <li>
+                                    <a class="dropdown-item" href="/profile">My profile</a>
+                                  </li>
+                                 
+                                  <li>
+                                    <a class="dropdown-item" href="/logout">Logout</a>
+                                  </li>
                                 </ul>
-                                <div class="hamburger menu_mm menu-vertical">
-                                    <i class="large material-icons font-color-white menu_mm menu-vertical">menu</i>
-                                </div>
+                              </div>
+                            </div>
+                    
+                        </ul>  
+                    </ul>
                             </nav>
                             <%}%>
                     </div>

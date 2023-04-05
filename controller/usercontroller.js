@@ -392,6 +392,7 @@ const logincreate_emp = (req, res) => {
 
 const postjob = (req, res) => {
     EmployerModel.findById(req.user.id).then(result3 => {
+    categorymodel.find().then(result4=>{
         const emp_status = req.user.isEmployer
         if (emp_status) {
             res.render('./user/postjob', {
@@ -399,13 +400,16 @@ const postjob = (req, res) => {
                 message: req.flash('message'),
                 error: req.flash('error'),
                 data: req.user,
-                emp_data: result3
+                emp_data: result3,
+                displayData:result4
             })
         } else {
             req.flash('error', "You are not Employer...")
 
             res.redirect('/')
         }
+    })
+        
 
     })
 }
@@ -873,10 +877,10 @@ const search = (req, res) => {
                         displayData: result,
                         emp_data: result3,
                         displayData2:result2
-
+                    })
     
                     })
-                })
+             
                 
             })
         })
@@ -884,6 +888,10 @@ const search = (req, res) => {
         PostModel.aggregate([
             { $match: { company: req.body.input } }
         ]).then(result => {
+            
+
+         
+
             categorymodel.find().then(result2=>{
             console.log(result);
             res.render('./user/job', {
@@ -893,11 +901,14 @@ const search = (req, res) => {
                 displayData2:result2
 
             })
-        })
-        })
+      
+    })
+                
+            })
+      
     }
-
 }
+
 const profile = (req, res) => {
     UserModel.findById(req.user.id).then(result3 => {
         EmployerModel.findById(req.user.id).then(result2 => {
@@ -985,6 +996,7 @@ const viewprofile = (req, res) => {
         })
     }
 }
+
 
 module.exports = {
     viewprofile,

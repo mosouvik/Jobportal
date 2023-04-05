@@ -33,14 +33,11 @@
                             <label>Job Category</label>
                             <select class="custom-select" name="category">
                                 <option selected>Select category</option>
-                                <option value="Education-Training">Education & Training</option>
-                                <option value="Sales-Marketing">Sales and Marketing</option>
-                                <option value="Computer-Programing">Computer Programing</option>
-                                <option value="Customer-Support">Customer Support</option>
-                                <option value="Design-Multimedia">Design & Multimedia</option>
-                                <option value="Web-Development">Web Development</option>
-                                <option value="Medical-Pharma">Medical/Pharma</option>
-                                <option value="Engineer-Architects">Engineer/Architects</option>
+                                <%if(displayData.length>0){
+                                    for(let data of displayData){
+                                        if(data.status){%>
+                                <option value="<%=data.category%>"><%=data.category%></option>
+                               <%}}}%>
                               </select>
                         </div>
                     </div>
