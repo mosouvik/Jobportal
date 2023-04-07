@@ -7,6 +7,7 @@ const AcitvityModel = require('../model/activity');
 const ContactModel = require('../model/contact');
 const TokenModel = require('../model/token');
 const Teammodel = require('../model/team');
+const path=require('path')
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
@@ -108,8 +109,8 @@ const registercreate = (req, res) => {
                         secure: false,
                         requireTLS: true,
                         auth: {
-                            user: "dassouvik9991@gmail.com",
-                            pass: "xvyosdscrianoksg",
+                            user: "biswasankur712@gmail.com",
+                            pass: "lndqlghrgnyinyky",
                         }
                     });
                     var mailOptions = {
@@ -195,8 +196,8 @@ const registercreate_emp = (req, res) => {
                         secure: false,
                         requireTLS: true,
                         auth: {
-                            user: "dassouvik9991@gmail.com",
-                            pass: "xvyosdscrianoksg",
+                            user: "biswasankur712@gmail.com",
+                            pass: "lndqlghrgnyinyky",
                         }
                     });
                     var mailOptions = {

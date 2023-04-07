@@ -6,7 +6,32 @@ funtional jobportal designed to fullfill a client's demand. We would all like to
 our deep gratitude to our mentor sir Raju Kayal who has guided us in completion of this
 project.   
 
- Admin Login.
+ Admin Login:------
 
 email:-ryandey6@gmail.com
 pass:- 123
+
+Jobseeker login:-----
+email:-bisawsankur712@gmail.com
+pass:-123
+
+email:-msouvik112@gmail.com
+pass:-123
+
+email:-dassouvik9991@gmail.com
+pass:-123
+
+
+Employer Login:-----
+
+email:-ryandey6@gmail.com
+pass:-123
+
+email:-msouvik112@gmail.com
+pass:-123
+
+email:-dassouvik9991@gmail.com
+pass:-123
+
+email:-bisawsankur712@gmail.com
+pass:-123
